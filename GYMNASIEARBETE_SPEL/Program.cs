@@ -13,6 +13,7 @@ namespace GYMNASIEARBETE_SPEL
 
             float circleX = 300;
             int circleSpeed = 720;
+            Ship ship = new Ship();
 
             while (!Raylib.WindowShouldClose())
             {
@@ -30,6 +31,9 @@ namespace GYMNASIEARBETE_SPEL
                 {
                     circleSpeed = -circleSpeed;
                 }
+
+                ship.MoveShip();
+                ship.DrawShip();
 
 
 
