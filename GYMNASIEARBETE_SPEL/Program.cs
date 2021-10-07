@@ -1,5 +1,6 @@
-﻿using System.Collections.ObjectModel;
-using System;
+﻿using System;
+using System.Numerics;
+using System.Collections.Generic;
 using Raylib_cs;
 
 namespace GYMNASIEARBETE_SPEL
@@ -9,11 +10,14 @@ namespace GYMNASIEARBETE_SPEL
         static void Main(string[] args)
         {
             Raylib.InitWindow(1300, 900, "Slutprojekt");
-            Raylib.SetTargetFPS(120);
+            Raylib.SetTargetFPS(60);
 
-            float circleX = 300;
-            int circleSpeed = 720;
             Ship ship = new Ship();
+            List<Bullet> bullets = new List<Bullet>();
+            bullets.Add(new Bullet(new Vector2(0, 0), new Vector2(300, 300), 20));
+            bullets.Add(new Bullet(new Vector2(0, 0), new Vector2(300, 150), 20));
+            bullets.Add(new Bullet(new Vector2(0, 0), new Vector2(300, 450), 20));
+
 
             while (!Raylib.WindowShouldClose())
             {
@@ -25,15 +29,13 @@ namespace GYMNASIEARBETE_SPEL
                 int fps = Raylib.GetFPS();
                 Raylib.DrawText($"{fps}", 50, 50, 50, Color.BLACK);
 
-                Raylib.DrawCircle((int)circleX, 500, 25, Color.BLACK);
-                circleX += circleSpeed * delta;
-                if (circleX > 1100 || circleX < 200)
-                {
-                    circleSpeed = -circleSpeed;
-                }
 
                 ship.MoveShip(delta);
                 ship.DrawShip();
+
+                Bullet.MoveBullets(bullets, delta);
+                Bullet.DrawBullets(bullets);
+
 
 
 
