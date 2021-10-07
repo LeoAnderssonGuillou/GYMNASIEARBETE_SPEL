@@ -19,14 +19,15 @@ namespace GYMNASIEARBETE_SPEL
             }
         }
 
-        float speed = 8;
+        float speedValue = 600;
         int width = 25;
         int height = 35;
         Vector2 movement = new Vector2(0, 0);
 
 
-        public void MoveShip()
+        public void MoveShip(float deltaTime)
         {
+            float speed = speedValue * deltaTime;
             movement.X = 0;
             movement.Y = 0;
             if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT))
@@ -52,10 +53,10 @@ namespace GYMNASIEARBETE_SPEL
 
             if (movement.X != 0 || movement.Y != 0)
             {
-                movement = Vector2.Normalize(movement) * speed;
+                movement = Vector2.Normalize(movement);
             }
 
-            Pos = new Vector2(Pos.X + movement.X, Pos.Y + movement.Y);
+            Pos = new Vector2(Pos.X + movement.X * speed, Pos.Y + movement.Y * speed);
             Pos = new Vector2(Math.Clamp(Pos.X, 0, 1300 - width), Math.Clamp(Pos.Y, 0, 900 - height));
         }
 

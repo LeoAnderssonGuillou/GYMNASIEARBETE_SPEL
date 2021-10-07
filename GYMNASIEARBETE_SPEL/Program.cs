@@ -9,7 +9,7 @@ namespace GYMNASIEARBETE_SPEL
         static void Main(string[] args)
         {
             Raylib.InitWindow(1300, 900, "Slutprojekt");
-            Raylib.SetTargetFPS(60);
+            Raylib.SetTargetFPS(120);
 
             float circleX = 300;
             int circleSpeed = 720;
@@ -32,7 +32,7 @@ namespace GYMNASIEARBETE_SPEL
                     circleSpeed = -circleSpeed;
                 }
 
-                ship.MoveShip();
+                ship.MoveShip(delta);
                 ship.DrawShip();
 
 
