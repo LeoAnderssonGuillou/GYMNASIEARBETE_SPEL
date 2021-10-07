@@ -20,7 +20,7 @@ namespace GYMNASIEARBETE_SPEL
             }
         }
 
-        float speedValue = 600;
+        float speedValue = 500;
         int width = 25;
         int height = 35;
         Vector2 movement = new Vector2(0, 0);
@@ -34,22 +34,18 @@ namespace GYMNASIEARBETE_SPEL
             if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT))
             {
                 movement.X--;
-                Raylib.DrawText("LEFT", 100, 700, 50, Color.BLACK);
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT))
             {
                 movement.X++;
-                Raylib.DrawText("RIGHT", 400, 700, 50, Color.BLACK);
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_UP))
             {
                 movement.Y--;
-                Raylib.DrawText("UP", 250, 600, 50, Color.BLACK);
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_DOWN))
             {
                 movement.Y++;
-                Raylib.DrawText("DOWN", 250, 750, 50, Color.BLACK);
             }
 
             if (movement.X != 0 || movement.Y != 0)
