@@ -44,11 +44,26 @@ namespace GYMNASIEARBETE_SPEL
             }
         }
 
+        public static void CheckCollisionWithShip(List<Bullet> bullets, Ship ship)
+        {
+            for (int x = bullets.Count - 1; x >= 0; x--)
+            {
+                Bullet bullet = bullets[x];
+                if (Raylib.CheckCollisionCircleRec(bullet.pos, bullet.radius, ship.hitbox))
+                {
+                    ship.DamageShip();
+                    bullets.RemoveAt(x);
+
+                }
+            }
+        }
+
         public static void DeleteOffScreenBullets(List<Bullet> bullets, Vector2 window)
         {
             for (int x = bullets.Count - 1; x >= 0; x--)
             {
-                if (bullets[x].pos.X > window.X + 100 || bullets[x].pos.X < -100 || bullets[x].pos.Y > window.Y + 100 || bullets[x].pos.Y < -100)
+                Bullet bullet = bullets[x];
+                if (bullet.pos.X > window.X + 100 || bullet.pos.X < -100 || bullet.pos.Y > window.Y + 100 || bullet.pos.Y < -100)
                 {
                     bullets.RemoveAt(x);
                 }

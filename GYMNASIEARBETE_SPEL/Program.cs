@@ -26,8 +26,6 @@ namespace GYMNASIEARBETE_SPEL
 
                 float delta = Raylib.GetFrameTime();
 
-                int fps = Raylib.GetFPS();
-                Raylib.DrawText($"{fps}", 50, 50, 50, Color.BLACK);
 
                 time += delta;
 
@@ -35,7 +33,7 @@ namespace GYMNASIEARBETE_SPEL
                 {
                     for (int i = 0; i < 5; i++)
                     {
-                        bullets.Add(new Bullet(new Vector2(650, 200), 550, 72 * i + cycles * delta * 1000, 0, 10, Color.BLACK));
+                        bullets.Add(new Bullet(new Vector2(650, 200), 550, 72 * i + (cycles * delta * 1000), 0, 10, Color.BLACK));
                     }
                     cycles++;
                     time = 0;
@@ -51,12 +49,18 @@ namespace GYMNASIEARBETE_SPEL
                 //     }
                 // }
 
-                ship.MoveShip(delta);
-                ship.DrawShip();
 
                 Bullet.MoveBullets(bullets, delta);
                 Bullet.DrawBullets(bullets);
+                Bullet.CheckCollisionWithShip(bullets, ship);
                 Bullet.DeleteOffScreenBullets(bullets, winSize);
+
+                ship.MoveShip(delta);
+                ship.DrawShip();
+
+
+                int fps = Raylib.GetFPS();
+                Raylib.DrawText($"{fps}", 50, 50, 50, Color.BLACK);
 
 
 
