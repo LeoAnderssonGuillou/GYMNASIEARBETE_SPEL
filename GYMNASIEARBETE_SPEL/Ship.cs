@@ -23,6 +23,15 @@ namespace GYMNASIEARBETE_SPEL
         float speedValue = 500;
         int width = 25;
         int height = 32;
+
+        Color orginalColor = new Color(255, 0, 0, 255);
+        Color fadedlColor = new Color(255, 0, 0, 0);
+        Color color = new Color(255, 0, 0, 255);
+        Clock isBlinking = new Clock();
+        Clock blinkCooldown = new Clock();
+        bool isVisable = true;
+
+
         public Rectangle hitbox;
         Vector2 hitboxShift = new Vector2(0, 0);
         Vector2 movement = new Vector2(0, 0);
@@ -70,15 +79,43 @@ namespace GYMNASIEARBETE_SPEL
             hitbox.y = Pos.Y + hitboxShift.Y;
         }
 
-        public void DrawShip()
+        public void DrawShip(float delta)
         {
-            Raylib.DrawRectangle((int)Pos.X, (int)Pos.Y, width, height, Color.RED);
+            Blinking(delta);
+            Raylib.DrawRectangle((int)Pos.X, (int)Pos.Y, width, height, color);
             Raylib.DrawRectangle((int)hitbox.x, (int)hitbox.y, (int)hitbox.width, (int)hitbox.height, Color.YELLOW);
         }
 
         public void DamageShip()
         {
+            isBlinking.time = 1;
+        }
 
+        public void Blinking(float delta)
+        {
+            if (isBlinking.time > 0)
+            {
+                isBlinking.TickDown(delta);
+                if (blinkCooldown.time <= 0)
+                {
+                    isVisable = !isVisable;
+                    if (isVisable)
+                    {
+                        color = orginalColor;
+                    }
+                    else
+                    {
+                        color = fadedlColor;
+                    }
+                    blinkCooldown.time = 0.1f;
+                }
+                blinkCooldown.TickDown(delta);
+            }
+            if (isBlinking.time < 0)
+            {
+                isBlinking.time = 0;
+                color = orginalColor;
+            }
         }
 
     }

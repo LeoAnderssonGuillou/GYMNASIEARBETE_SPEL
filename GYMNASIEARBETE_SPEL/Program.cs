@@ -56,7 +56,7 @@ namespace GYMNASIEARBETE_SPEL
                 Bullet.DeleteOffScreenBullets(bullets, winSize);
 
                 ship.MoveShip(delta);
-                ship.DrawShip();
+                ship.DrawShip(delta);
 
 
                 int fps = Raylib.GetFPS();
