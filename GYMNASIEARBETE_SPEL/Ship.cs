@@ -24,6 +24,11 @@ namespace GYMNASIEARBETE_SPEL
         int width = 25;
         int height = 32;
 
+        float maxHp = 1000;
+        float hp = 1000;
+        Vector2 hBar = new Vector2(500, 25);
+        Rectangle healhtBar;
+
         Color orginalColor = new Color(255, 0, 0, 255);
         Color fadedlColor = new Color(255, 0, 0, 0);
         Color color = new Color(255, 0, 0, 255);
@@ -36,13 +41,15 @@ namespace GYMNASIEARBETE_SPEL
         Vector2 hitboxShift = new Vector2(0, 0);
         Vector2 movement = new Vector2(0, 0);
 
-        public Ship()
+        public Ship(Vector2 window)
         {
             int boxWidht = 15;
             int boxHeight = 15;
             hitboxShift.X = (width - boxWidht) / 2;
             hitboxShift.Y = (height - boxHeight) / 2;
             hitbox = new Rectangle(pos.X + hitboxShift.X, pos.Y + hitboxShift.Y, boxWidht, boxHeight);
+
+            healhtBar = new Rectangle(((int)window.X / 2) - ((int)hBar.X / 2), (int)(window.Y - hBar.Y * 2), (int)hBar.X, (int)hBar.Y);
         }
 
 
@@ -89,6 +96,7 @@ namespace GYMNASIEARBETE_SPEL
         public void DamageShip()
         {
             isBlinking.time = 1;
+            hp -= 50;
         }
 
         public void Blinking(float delta)
@@ -116,6 +124,13 @@ namespace GYMNASIEARBETE_SPEL
                 isBlinking.time = 0;
                 color = orginalColor;
             }
+        }
+
+        public void DrawHealhtBar(Vector2 window)
+        {
+            Raylib.DrawRectangleRec(healhtBar, Color.RED);
+            float greenWidth = (hp / maxHp) * healhtBar.width;
+            Raylib.DrawRectangle((int)healhtBar.x, (int)healhtBar.y, (int)greenWidth, (int)healhtBar.height, Color.GREEN);
         }
 
     }

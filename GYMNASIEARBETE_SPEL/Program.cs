@@ -13,7 +13,7 @@ namespace GYMNASIEARBETE_SPEL
             Raylib.InitWindow((int)winSize.X, (int)winSize.Y, "Slutprojekt");
             Raylib.SetTargetFPS(60);
 
-            Ship ship = new Ship();
+            Ship ship = new Ship(winSize);
             List<Bullet> bullets = new List<Bullet>();
 
             float time = 0;
@@ -57,6 +57,7 @@ namespace GYMNASIEARBETE_SPEL
 
                 ship.MoveShip(delta);
                 ship.DrawShip(delta);
+                ship.DrawHealhtBar(winSize);
 
 
                 int fps = Raylib.GetFPS();
