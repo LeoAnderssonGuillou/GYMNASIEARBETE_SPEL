@@ -30,9 +30,9 @@ namespace GYMNASIEARBETE_SPEL
         Rectangle healhtBar;
 
         Color orginalColor = new Color(255, 0, 0, 255);
-        Color fadedlColor = new Color(255, 0, 0, 0);
+        Color fadedlColor = new Color(255, 0, 0, 75);
         Color color = new Color(255, 0, 0, 255);
-        Clock isBlinking = new Clock();
+        Clock invincibleTimer = new Clock();
         Clock blinkCooldown = new Clock();
         bool isVisable = true;
 
@@ -90,20 +90,23 @@ namespace GYMNASIEARBETE_SPEL
         {
             Blinking(delta);
             Raylib.DrawRectangle((int)Pos.X, (int)Pos.Y, width, height, color);
-            Raylib.DrawRectangle((int)hitbox.x, (int)hitbox.y, (int)hitbox.width, (int)hitbox.height, Color.YELLOW);
+            //Raylib.DrawRectangle((int)hitbox.x, (int)hitbox.y, (int)hitbox.width, (int)hitbox.height, Color.YELLOW);
         }
 
         public void DamageShip()
         {
-            isBlinking.time = 1;
-            hp -= 50;
+            if (invincibleTimer.time <= 0)
+            {
+                invincibleTimer.time = 1;
+                hp -= 50;
+            }
         }
 
         public void Blinking(float delta)
         {
-            if (isBlinking.time > 0)
+            if (invincibleTimer.time > 0)
             {
-                isBlinking.TickDown(delta);
+                invincibleTimer.TickDown(delta);
                 if (blinkCooldown.time <= 0)
                 {
                     isVisable = !isVisable;
@@ -119,9 +122,9 @@ namespace GYMNASIEARBETE_SPEL
                 }
                 blinkCooldown.TickDown(delta);
             }
-            if (isBlinking.time < 0)
+            if (invincibleTimer.time < 0)
             {
-                isBlinking.time = 0;
+                invincibleTimer.time = 0;
                 color = orginalColor;
             }
         }
