@@ -6,6 +6,7 @@ namespace GYMNASIEARBETE_SPEL
     {
         public float time = 0;
 
+
         public void TickUp(float delta)
         {
             time += delta;

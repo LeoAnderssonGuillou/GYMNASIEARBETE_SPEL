@@ -25,6 +25,7 @@ namespace GYMNASIEARBETE_SPEL
             color = color_;
         }
 
+        //Draws all bullets
         public static void DrawBullets(List<Bullet> bullets)
         {
             foreach (Bullet bullet in bullets)
@@ -33,6 +34,7 @@ namespace GYMNASIEARBETE_SPEL
             }
         }
 
+        //Moves all bullets
         public static void MoveBullets(List<Bullet> bullets, float delta)
         {
             foreach (Bullet bullet in bullets)
@@ -44,6 +46,8 @@ namespace GYMNASIEARBETE_SPEL
             }
         }
 
+        //Check collision with ship for all bullets
+        //If collision is detected, remove bullet and try to damage ship
         public static void CheckCollisionWithShip(List<Bullet> bullets, Ship ship)
         {
             for (int x = bullets.Count - 1; x >= 0; x--)
@@ -58,6 +62,7 @@ namespace GYMNASIEARBETE_SPEL
             }
         }
 
+        //If any bullet is off-screen, remove it
         public static void DeleteOffScreenBullets(List<Bullet> bullets, Vector2 window)
         {
             for (int x = bullets.Count - 1; x >= 0; x--)

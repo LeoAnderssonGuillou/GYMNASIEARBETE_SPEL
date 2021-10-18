@@ -13,8 +13,9 @@ namespace GYMNASIEARBETE_SPEL
             Raylib.InitWindow((int)winSize.X, (int)winSize.Y, "Slutprojekt");
             Raylib.SetTargetFPS(60);
 
-            Ship ship = new Ship(winSize);
+            Ship ship = new Ship(winSize, new Gun());
             List<Bullet> bullets = new List<Bullet>();
+            List<Shot> shots = new List<Shot>();
 
             float time = 0;
             int cycles = 0;
@@ -54,6 +55,10 @@ namespace GYMNASIEARBETE_SPEL
                 Bullet.DrawBullets(bullets);
                 Bullet.CheckCollisionWithShip(bullets, ship);
                 Bullet.DeleteOffScreenBullets(bullets, winSize);
+
+                Shot.MoveShots(shots, delta);
+                Shot.DrawShots(shots);
+
 
                 ship.MoveShip(delta);
                 ship.DrawShip(delta);

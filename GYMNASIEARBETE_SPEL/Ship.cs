@@ -7,6 +7,7 @@ namespace GYMNASIEARBETE_SPEL
 {
     public class Ship
     {
+        //Position
         Vector2 pos = new Vector2(650, 600);
         public Vector2 Pos
         {
@@ -20,15 +21,18 @@ namespace GYMNASIEARBETE_SPEL
             }
         }
 
+        //Speed and size
         float speedValue = 500;
         int width = 25;
         int height = 32;
 
+        //HP
         float maxHp = 1000;
         float hp = 1000;
         Vector2 hBar = new Vector2(500, 25);
         Rectangle healhtBar;
 
+        //Color and invincibility
         Color orginalColor = new Color(255, 0, 0, 255);
         Color fadedlColor = new Color(255, 0, 0, 75);
         Color color = new Color(255, 0, 0, 255);
@@ -36,12 +40,14 @@ namespace GYMNASIEARBETE_SPEL
         Clock blinkCooldown = new Clock();
         bool isVisable = true;
 
-
+        //Hitbox and miscellaneous
         public Rectangle hitbox;
         Vector2 hitboxShift = new Vector2(0, 0);
         Vector2 movement = new Vector2(0, 0);
+        Gun gun;
 
-        public Ship(Vector2 window)
+        //Calcualte location of hitbox and healthbar depending of window and ship size
+        public Ship(Vector2 window, Gun gun_)
         {
             int boxWidht = 15;
             int boxHeight = 15;
@@ -50,14 +56,17 @@ namespace GYMNASIEARBETE_SPEL
             hitbox = new Rectangle(pos.X + hitboxShift.X, pos.Y + hitboxShift.Y, boxWidht, boxHeight);
 
             healhtBar = new Rectangle(((int)window.X / 2) - ((int)hBar.X / 2), (int)(window.Y - hBar.Y * 2), (int)hBar.X, (int)hBar.Y);
+            gun = gun_;
         }
 
 
+        //Move ship based on input
         public void MoveShip(float deltaTime)
         {
             float speed = speedValue * deltaTime;
             movement.X = 0;
             movement.Y = 0;
+            //Set movement vector to one of 8 states, determining direction
             if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT))
             {
                 movement.X--;
@@ -75,17 +84,22 @@ namespace GYMNASIEARBETE_SPEL
                 movement.Y++;
             }
 
+            //Normalize vector to ensure equal speed in all directions
             if (movement.X != 0 || movement.Y != 0)
             {
                 movement = Vector2.Normalize(movement);
             }
 
+            //Change ship location
             Pos = new Vector2(Pos.X + movement.X * speed, Pos.Y + movement.Y * speed);
+            //Clamp location within window
             Pos = new Vector2(Math.Clamp(Pos.X, 0, 1300 - width), Math.Clamp(Pos.Y, 0, 900 - height));
+            //Change hitbox location
             hitbox.x = Pos.X + hitboxShift.X;
             hitbox.y = Pos.Y + hitboxShift.Y;
         }
 
+        //Draw ship
         public void DrawShip(float delta)
         {
             Blinking(delta);
@@ -93,6 +107,7 @@ namespace GYMNASIEARBETE_SPEL
             //Raylib.DrawRectangle((int)hitbox.x, (int)hitbox.y, (int)hitbox.width, (int)hitbox.height, Color.YELLOW);
         }
 
+        //Runs when ship collides with bullet
         public void DamageShip()
         {
             if (invincibleTimer.time <= 0)
@@ -102,11 +117,14 @@ namespace GYMNASIEARBETE_SPEL
             }
         }
 
+        //Handles invicibility, runs in DrawShip
         public void Blinking(float delta)
         {
+            //When invicibleTimer is > 0 ship is invincible
             if (invincibleTimer.time > 0)
             {
                 invincibleTimer.TickDown(delta);
+                //Another timer handles the actual blinking
                 if (blinkCooldown.time <= 0)
                 {
                     isVisable = !isVisable;
@@ -122,13 +140,15 @@ namespace GYMNASIEARBETE_SPEL
                 }
                 blinkCooldown.TickDown(delta);
             }
-            if (invincibleTimer.time < 0)
+            //When invicibleTimer reaches 0, ship is no longer invincible
+            if (invincibleTimer.time <= 0)
             {
                 invincibleTimer.time = 0;
                 color = orginalColor;
             }
         }
 
+        //Draw health bar based on window size and HP
         public void DrawHealhtBar(Vector2 window)
         {
             Raylib.DrawRectangleRec(healhtBar, Color.RED);
