@@ -11,7 +11,7 @@ namespace GYMNASIEARBETE_SPEL
         Vector2 speed = new Vector2(0, 0);
         Vector2 movement;
         float trueSpeed;
-        int radius = 5;
+        int radius = 8;
         Color color = Color.GREEN;
 
         public Shot(Vector2 pos_, float speed_, Vector2 movement_)
@@ -35,10 +35,18 @@ namespace GYMNASIEARBETE_SPEL
             {
                 shot.pos.X += shot.movement.X * shot.trueSpeed * delta;
                 shot.pos.Y += shot.movement.Y * shot.trueSpeed * delta;
-                // shot.speed.X = MathF.Sin(shot.angle * MathF.PI / 180) * shot.trueSpeed * delta;
-                // shot.speed.Y = MathF.Cos(shot.angle * MathF.PI / 180) * shot.trueSpeed * delta;
-                // shot.pos = shot.pos + shot.speed;
+            }
+        }
 
+        public static void DeleteOffScreenShots(List<Shot> shots, Vector2 window)
+        {
+            for (int x = shots.Count - 1; x >= 0; x--)
+            {
+                Shot shot = shots[x];
+                if (shot.pos.X > window.X + 100 || shot.pos.X < -100 || shot.pos.Y > window.Y + 100 || shot.pos.Y < -100)
+                {
+                    shots.RemoveAt(x);
+                }
             }
         }
     }

@@ -58,7 +58,7 @@ namespace GYMNASIEARBETE_SPEL
 
                 Shot.MoveShots(shots, delta);
                 Shot.DrawShots(shots);
-
+                Shot.DeleteOffScreenShots(shots, winSize);
 
                 ship.MoveShip(delta);
                 ship.DrawShip(delta);

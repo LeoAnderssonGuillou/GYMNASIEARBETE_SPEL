@@ -23,8 +23,9 @@ namespace GYMNASIEARBETE_SPEL
 
         //Speed and size
         float speedValue = 500;
-        int width = 25;
-        int height = 32;
+        public int width = 25;
+        public int height = 32;
+        Vector2 currentSpeed;
 
         //HP
         float maxHp = 1000;

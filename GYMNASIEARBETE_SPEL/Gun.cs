@@ -1,3 +1,4 @@
+using System.Threading;
 using System;
 using System.Numerics;
 using System.Collections.Generic;
@@ -10,6 +11,8 @@ namespace GYMNASIEARBETE_SPEL
         Vector2 aim;
         bool shouldShoot;
         Clock shootCool = new Clock();
+        int gunLength = 20;
+        int shotSpeed = 600;
 
 
         public void Aim()
@@ -20,27 +23,28 @@ namespace GYMNASIEARBETE_SPEL
             if (Raylib.IsKeyDown(KeyboardKey.KEY_A))
             {
                 aim.X--;
-                shouldShoot = true;
+                //shouldShoot = true;
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_D))
             {
                 aim.X++;
-                shouldShoot = true;
+                //shouldShoot = true;
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_W))
             {
                 aim.Y--;
-                shouldShoot = true;
+                //shouldShoot = true;
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_S))
             {
                 aim.Y++;
-                shouldShoot = true;
+                //shouldShoot = true;
             }
 
             if (aim.X != 0 || aim.Y != 0)
             {
                 aim = Vector2.Normalize(aim);
+                shouldShoot = true;
             }
         }
 
@@ -48,7 +52,10 @@ namespace GYMNASIEARBETE_SPEL
         {
             if (shouldShoot && shootCool.time <= 0)
             {
-                shots.Add(new Shot(ship.Pos, 600, aim));
+                Vector2 startPos = new Vector2(0, 0);
+                startPos.X = ship.Pos.X + ship.width / 2 + aim.X * gunLength;
+                startPos.Y = ship.Pos.Y + ship.height / 2 + aim.Y * gunLength;
+                shots.Add(new Shot(startPos, shotSpeed, aim));
                 shootCool.time = 0.1f;
             }
             shootCool.TickDown(delta);
