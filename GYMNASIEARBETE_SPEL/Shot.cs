@@ -9,16 +9,16 @@ namespace GYMNASIEARBETE_SPEL
     {
         Vector2 pos = new Vector2(0, 0);
         Vector2 speed = new Vector2(0, 0);
+        Vector2 movement;
         float trueSpeed;
-        float angle;
         int radius = 5;
         Color color = Color.GREEN;
 
-        public Shot(Vector2 pos_, float speed_, float angle_)
+        public Shot(Vector2 pos_, float speed_, Vector2 movement_)
         {
             pos = pos_;
             trueSpeed = speed_;
-            angle = angle_;
+            movement = movement_;
         }
 
         public static void DrawShots(List<Shot> shots)
@@ -33,9 +33,11 @@ namespace GYMNASIEARBETE_SPEL
         {
             foreach (Shot shot in shots)
             {
-                shot.speed.X = MathF.Sin(shot.angle * MathF.PI / 180) * shot.trueSpeed * delta;
-                shot.speed.Y = MathF.Cos(shot.angle * MathF.PI / 180) * shot.trueSpeed * delta;
-                shot.pos = shot.pos + shot.speed;
+                shot.pos.X += shot.movement.X * shot.trueSpeed * delta;
+                shot.pos.Y += shot.movement.Y * shot.trueSpeed * delta;
+                // shot.speed.X = MathF.Sin(shot.angle * MathF.PI / 180) * shot.trueSpeed * delta;
+                // shot.speed.Y = MathF.Cos(shot.angle * MathF.PI / 180) * shot.trueSpeed * delta;
+                // shot.pos = shot.pos + shot.speed;
 
             }
         }

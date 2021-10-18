@@ -8,33 +8,34 @@ namespace GYMNASIEARBETE_SPEL
     public class Gun
     {
         Vector2 aim;
-        bool willShoot;
+        bool shouldShoot;
+        Clock shootCool = new Clock();
 
 
         public void Aim()
         {
-            willShoot = false;
+            shouldShoot = false;
             aim.X = 0;
             aim.Y = 0;
             if (Raylib.IsKeyDown(KeyboardKey.KEY_A))
             {
                 aim.X--;
-                willShoot = true;
+                shouldShoot = true;
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_D))
             {
                 aim.X++;
-                willShoot = true;
+                shouldShoot = true;
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_W))
             {
                 aim.Y--;
-                willShoot = true;
+                shouldShoot = true;
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_S))
             {
                 aim.Y++;
-                willShoot = true;
+                shouldShoot = true;
             }
 
             if (aim.X != 0 || aim.Y != 0)
@@ -43,12 +44,14 @@ namespace GYMNASIEARBETE_SPEL
             }
         }
 
-        public void Shoot()
+        public void Shoot(List<Shot> shots, Ship ship, float delta)
         {
-            if (willShoot)
+            if (shouldShoot && shootCool.time <= 0)
             {
-
+                shots.Add(new Shot(ship.Pos, 600, aim));
+                shootCool.time = 0.1f;
             }
+            shootCool.TickDown(delta);
         }
     }
 }

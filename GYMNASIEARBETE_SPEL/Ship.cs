@@ -44,7 +44,7 @@ namespace GYMNASIEARBETE_SPEL
         public Rectangle hitbox;
         Vector2 hitboxShift = new Vector2(0, 0);
         Vector2 movement = new Vector2(0, 0);
-        Gun gun;
+        public Gun gun;
 
         //Calcualte location of hitbox and healthbar depending of window and ship size
         public Ship(Vector2 window, Gun gun_)

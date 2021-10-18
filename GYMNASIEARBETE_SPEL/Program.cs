@@ -10,7 +10,7 @@ namespace GYMNASIEARBETE_SPEL
         static void Main(string[] args)
         {
             Vector2 winSize = new Vector2(1300, 900);
-            Raylib.InitWindow((int)winSize.X, (int)winSize.Y, "Slutprojekt");
+            Raylib.InitWindow((int)winSize.X, (int)winSize.Y, "Gymnasiearbete");
             Raylib.SetTargetFPS(60);
 
             Ship ship = new Ship(winSize, new Gun());
@@ -63,6 +63,9 @@ namespace GYMNASIEARBETE_SPEL
                 ship.MoveShip(delta);
                 ship.DrawShip(delta);
                 ship.DrawHealhtBar(winSize);
+
+                ship.gun.Aim();
+                ship.gun.Shoot(shots, ship, delta);
 
 
                 int fps = Raylib.GetFPS();
