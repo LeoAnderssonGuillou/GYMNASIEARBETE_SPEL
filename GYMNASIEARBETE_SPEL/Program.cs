@@ -16,7 +16,11 @@ namespace GYMNASIEARBETE_SPEL
             Ship ship = new Ship(winSize, new Gun());
             List<Bullet> bullets = new List<Bullet>();
             List<Shot> shots = new List<Shot>();
+
             List<SplinterRepeat> splinterRepeats = new List<SplinterRepeat>();
+            List<CircleRepeat> circleRepeats = new List<CircleRepeat>();
+
+
             AttackLibrary attacks = new AttackLibrary() { bulletList = bullets };
 
             Vector2 start = new Vector2(650, 100);
@@ -25,6 +29,7 @@ namespace GYMNASIEARBETE_SPEL
 
             SplinterRepeat test = new SplinterRepeat(attacks.SplinterShot, 4, 0.2f, start, 500, 0, 10, Color.WHITE, 9, 6);
             splinterRepeats.Add(test);
+            circleRepeats.Add(new CircleRepeat(attacks.BulletCircle, 4, 0.2f, start, 200, 12, 5, Color.WHITE, 11));
 
 
             while (!Raylib.WindowShouldClose())
@@ -40,6 +45,7 @@ namespace GYMNASIEARBETE_SPEL
 
 
                 SplinterRepeat.TickAllRepeats(splinterRepeats, delta);
+                CircleRepeat.TickAllCircleRepeats(circleRepeats, delta);
 
 
                 Bullet.MoveBullets(bullets, delta);
