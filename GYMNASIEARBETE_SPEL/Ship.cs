@@ -22,10 +22,11 @@ namespace GYMNASIEARBETE_SPEL
         }
 
         //Speed and size
-        float speedValue = 500;
+        public float SpeedValue { get; set; } = 500;
         public int width = 25;
         public int height = 32;
-        Vector2 currentSpeed;
+        //Vector2 currentSpeed;
+        public Vector2 movement = new Vector2(0, 0);
 
         //HP
         float maxHp = 1000;
@@ -44,7 +45,6 @@ namespace GYMNASIEARBETE_SPEL
         //Hitbox and miscellaneous
         public Rectangle hitbox;
         Vector2 hitboxShift = new Vector2(0, 0);
-        Vector2 movement = new Vector2(0, 0);
         public Gun gun;
 
         //Calcualte location of hitbox and healthbar depending of window and ship size
@@ -64,7 +64,7 @@ namespace GYMNASIEARBETE_SPEL
         //Move ship based on input
         public void MoveShip(float deltaTime)
         {
-            float speed = speedValue * deltaTime;
+            float speed = SpeedValue * deltaTime;
             movement.X = 0;
             movement.Y = 0;
             //Set movement vector to one of 8 states, determining direction

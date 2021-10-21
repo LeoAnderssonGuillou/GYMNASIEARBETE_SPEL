@@ -12,7 +12,7 @@ namespace GYMNASIEARBETE_SPEL
         bool shouldShoot;
         Clock shootCool = new Clock();
         int gunLength = 20;
-        int shotSpeed = 600;
+        int shotSpeed = 1000;
 
 
         public void Aim()
@@ -20,27 +20,27 @@ namespace GYMNASIEARBETE_SPEL
             shouldShoot = false;
             aim.X = 0;
             aim.Y = 0;
+            //WSAD input for shooting
+            //Aim can end up in 8 different states, resulting in shooting in 8 respective directions
             if (Raylib.IsKeyDown(KeyboardKey.KEY_A))
             {
                 aim.X--;
-                //shouldShoot = true;
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_D))
             {
                 aim.X++;
-                //shouldShoot = true;
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_W))
             {
                 aim.Y--;
-                //shouldShoot = true;
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_S))
             {
                 aim.Y++;
-                //shouldShoot = true;
             }
 
+            //Only shoots when aim isn't (0,0)
+            //Aim is (0,0) when WSAD isn't touched or if for example both A and D are pressed
             if (aim.X != 0 || aim.Y != 0)
             {
                 aim = Vector2.Normalize(aim);
@@ -52,10 +52,15 @@ namespace GYMNASIEARBETE_SPEL
         {
             if (shouldShoot && shootCool.time <= 0)
             {
+                //Determine starting position of shot
                 Vector2 startPos = new Vector2(0, 0);
                 startPos.X = ship.Pos.X + ship.width / 2 + aim.X * gunLength;
                 startPos.Y = ship.Pos.Y + ship.height / 2 + aim.Y * gunLength;
-                shots.Add(new Shot(startPos, shotSpeed, aim));
+
+                //Create new shot
+                shots.Add(new Shot(startPos, aim * shotSpeed));
+                //Alternative shot speed - affected by ship speed
+                //shots.Add(new Shot(startPos, aim * shotSpeed + ship.movement * ship.SpeedValue));
                 shootCool.time = 0.1f;
             }
             shootCool.TickDown(delta);

@@ -39,6 +39,7 @@ namespace GYMNASIEARBETE_SPEL
                     cycles++;
                     time = 0;
                 }
+                bullets.Add(new Bullet(new Vector2(650, 200), 550, 90, 0, 50, Color.RED));
 
                 // if (time > 0.25)
                 // {

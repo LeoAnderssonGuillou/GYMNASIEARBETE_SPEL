@@ -7,9 +7,13 @@ namespace GYMNASIEARBETE_SPEL
 {
     public class Bullet
     {
+        //Position of bullet
         Vector2 pos = new Vector2(0, 0);
+        //Movement of bullet
         Vector2 speed = new Vector2(0, 0);
-        float trueSpeed;
+        //Absolute velocity of bullet
+        float speedValue;
+        //Direction of movement (0: down, 90: right, 180: up, 270: left)
         float angle;
         float angleChange;
         int radius;
@@ -18,7 +22,7 @@ namespace GYMNASIEARBETE_SPEL
         public Bullet(Vector2 pos_, float speed_, float angle_, float angleChange_, int radius_, Color color_)
         {
             pos = pos_;
-            trueSpeed = speed_;
+            speedValue = speed_;
             angle = angle_;
             angleChange = angleChange_;
             radius = radius_;
@@ -39,8 +43,9 @@ namespace GYMNASIEARBETE_SPEL
         {
             foreach (Bullet bullet in bullets)
             {
-                bullet.speed.X = MathF.Sin(bullet.angle * MathF.PI / 180) * bullet.trueSpeed * delta;
-                bullet.speed.Y = MathF.Cos(bullet.angle * MathF.PI / 180) * bullet.trueSpeed * delta;
+                //Move bullet using angle and speedValue
+                bullet.speed.X = MathF.Sin(bullet.angle * MathF.PI / 180) * bullet.speedValue * delta;
+                bullet.speed.Y = MathF.Cos(bullet.angle * MathF.PI / 180) * bullet.speedValue * delta;
                 bullet.pos = bullet.pos + bullet.speed;
                 bullet.angle += bullet.angleChange * delta;
             }
