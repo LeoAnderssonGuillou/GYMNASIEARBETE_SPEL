@@ -16,11 +16,16 @@ namespace GYMNASIEARBETE_SPEL
             Ship ship = new Ship(winSize, new Gun());
             List<Bullet> bullets = new List<Bullet>();
             List<Shot> shots = new List<Shot>();
+            List<SplinterRepeat> splinterRepeats = new List<SplinterRepeat>();
             AttackLibrary attacks = new AttackLibrary() { bulletList = bullets };
 
             Vector2 start = new Vector2(650, 100);
             //attacks.BulletCircle(start, 200, 12, Color.WHITE, 11);
             //attacks.SplinterShot(start, 500, 0, 5, Color.WHITE, 15, 4);
+
+            SplinterRepeat test = new SplinterRepeat(attacks.SplinterShot, 4, 0.2f, start, 500, 0, 10, Color.WHITE, 9, 6);
+            splinterRepeats.Add(test);
+
 
             while (!Raylib.WindowShouldClose())
             {
@@ -33,6 +38,8 @@ namespace GYMNASIEARBETE_SPEL
 
 
 
+
+                SplinterRepeat.TickAllRepeats(splinterRepeats, delta);
 
 
                 Bullet.MoveBullets(bullets, delta);
@@ -53,7 +60,7 @@ namespace GYMNASIEARBETE_SPEL
 
 
                 int fps = Raylib.GetFPS();
-                Raylib.DrawText($"{fps}", 50, 50, 50, Color.BLACK);
+                Raylib.DrawText($"{fps}", 50, 50, 50, Color.GRAY);
 
 
 
