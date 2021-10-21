@@ -15,16 +15,14 @@ namespace GYMNASIEARBETE_SPEL
         float speedValue;
         //Direction of movement (0: down, 90: right, 180: up, 270: left)
         float angle;
-        float angleChange;
         int radius;
         Color color;
 
-        public Bullet(Vector2 pos_, float speed_, float angle_, float angleChange_, int radius_, Color color_)
+        public Bullet(Vector2 pos_, float speed_, float angle_, int radius_, Color color_)
         {
             pos = pos_;
             speedValue = speed_;
             angle = angle_;
-            angleChange = angleChange_;
             radius = radius_;
             color = color_;
         }
@@ -47,7 +45,6 @@ namespace GYMNASIEARBETE_SPEL
                 bullet.speed.X = MathF.Sin(bullet.angle * MathF.PI / 180) * bullet.speedValue * delta;
                 bullet.speed.Y = MathF.Cos(bullet.angle * MathF.PI / 180) * bullet.speedValue * delta;
                 bullet.pos = bullet.pos + bullet.speed;
-                bullet.angle += bullet.angleChange * delta;
             }
         }
 

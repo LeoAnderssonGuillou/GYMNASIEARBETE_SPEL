@@ -16,40 +16,23 @@ namespace GYMNASIEARBETE_SPEL
             Ship ship = new Ship(winSize, new Gun());
             List<Bullet> bullets = new List<Bullet>();
             List<Shot> shots = new List<Shot>();
+            AttackLibrary attacks = new AttackLibrary() { bulletList = bullets };
 
-            float time = 0;
-            int cycles = 0;
+            Vector2 start = new Vector2(650, 100);
+            //attacks.BulletCircle(start, 200, 12, Color.WHITE, 11);
+            //attacks.SplinterShot(start, 500, 0, 5, Color.WHITE, 15, 4);
 
             while (!Raylib.WindowShouldClose())
             {
                 Raylib.BeginDrawing();
-                Raylib.ClearBackground(Color.WHITE);
+                Raylib.ClearBackground(Color.BLACK);
 
                 float delta = Raylib.GetFrameTime();
 
 
-                time += delta;
 
-                if (time > 0.1)
-                {
-                    for (int i = 0; i < 5; i++)
-                    {
-                        bullets.Add(new Bullet(new Vector2(650, 200), 550, 72 * i + (cycles * delta * 1000), 0, 10, Color.BLACK));
-                    }
-                    cycles++;
-                    time = 0;
-                }
-                bullets.Add(new Bullet(new Vector2(650, 200), 550, 90, 0, 50, Color.RED));
 
-                // if (time > 0.25)
-                // {
-                //     for (int i = 0; i < 25; i++)
-                //     {
-                //         bullets.Add(new Bullet(new Vector2(650, 450), 350, 37 * i + cycles * delta * 37, 59, 15, Color.BLACK));
-                //         cycles++;
-                //         time = 0;
-                //     }
-                // }
+
 
 
                 Bullet.MoveBullets(bullets, delta);
