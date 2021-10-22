@@ -17,8 +17,7 @@ namespace GYMNASIEARBETE_SPEL
             List<Bullet> bullets = new List<Bullet>();
             List<Shot> shots = new List<Shot>();
 
-            List<SplinterRepeat> splinterRepeats = new List<SplinterRepeat>();
-            List<CircleRepeat> circleRepeats = new List<CircleRepeat>();
+            List<Repeat> repeats = new List<Repeat>();
 
 
             AttackLibrary attacks = new AttackLibrary() { bulletList = bullets };
@@ -27,9 +26,10 @@ namespace GYMNASIEARBETE_SPEL
             //attacks.BulletCircle(start, 200, 12, Color.WHITE, 11);
             //attacks.SplinterShot(start, 500, 0, 5, Color.WHITE, 15, 4);
 
-            SplinterRepeat test = new SplinterRepeat(attacks.SplinterShot, 4, 0.2f, start, 500, 0, 10, Color.WHITE, 9, 6);
-            splinterRepeats.Add(test);
-            circleRepeats.Add(new CircleRepeat(attacks.BulletCircle, 4, 0.2f, start, 200, 12, 5, Color.WHITE, 11));
+            AttackInfo testInfo = AttackInfo.Default();
+            Repeat test = new Repeat(attacks.BulletCircle, 4, 0.2f, testInfo);
+            repeats.Add(test);
+            repeats.Add(new Repeat(attacks.SplinterShot, 6, 0.2f, testInfo));
 
 
             while (!Raylib.WindowShouldClose())
@@ -42,11 +42,7 @@ namespace GYMNASIEARBETE_SPEL
 
 
 
-
-
-                SplinterRepeat.TickAllRepeats(splinterRepeats, delta);
-                CircleRepeat.TickAllCircleRepeats(circleRepeats, delta);
-
+                Repeat.TickAllRepeats(repeats, delta);
 
                 Bullet.MoveBullets(bullets, delta);
                 Bullet.DrawBullets(bullets);
@@ -67,7 +63,6 @@ namespace GYMNASIEARBETE_SPEL
 
                 int fps = Raylib.GetFPS();
                 Raylib.DrawText($"{fps}", 50, 50, 50, Color.GRAY);
-
 
 
 

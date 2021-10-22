@@ -10,32 +10,32 @@ namespace GYMNASIEARBETE_SPEL
         public List<Bullet> bulletList;
 
         //Fires a single bullet
-        public void SingleBullet(Vector2 startPos, float speed, float angle, int radius, Color color)
+        public void SingleBullet(AttackInfo info)
         {
-            bulletList.Add(new Bullet(startPos, speed, angle, radius, color));
+            bulletList.Add(new Bullet(info.StartPos, info.Speed, info.Angle, info.Radius, info.Color));
 
         }
 
         //Creates a circle of bullets moving away from the starting position in all directions
-        public void BulletCircle(Vector2 startPos, float speed, int radius, Color color, int amount)
+        public void BulletCircle(AttackInfo info)
         {
-            for (int i = 0; i < amount; i++)
+            for (int i = 0; i < info.Amount; i++)
             {
-                bulletList.Add(new Bullet(startPos, speed, i * 360 / amount, radius, color));
+                bulletList.Add(new Bullet(info.StartPos, info.Speed, i * 360 / info.Amount, info.Radius, info.Color));
             }
         }
 
         //Fires a shotgun-like shot of bullets. Amount must be an odd number
-        public void SplinterShot(Vector2 startPos, float speed, float angle, int radius, Color color, int amount, int spacing)
+        public void SplinterShot(AttackInfo info)
         {
-            bulletList.Add(new Bullet(startPos, speed, angle, radius, color));
-            for (int i = 1; i < ((amount - 1) / 2) + 1; i++)
+            bulletList.Add(new Bullet(info.StartPos, info.Speed, info.Angle, info.Radius, info.Color));
+            for (int i = 1; i < ((info.Amount - 1) / 2) + 1; i++)
             {
-                bulletList.Add(new Bullet(startPos, speed, angle + i * spacing, radius, color));
+                bulletList.Add(new Bullet(info.StartPos, info.Speed, info.Angle + i * info.Spacing, info.Radius, info.Color));
             }
-            for (int i = 1; i < ((amount - 1) / 2) + 1; i++)
+            for (int i = 1; i < ((info.Amount - 1) / 2) + 1; i++)
             {
-                bulletList.Add(new Bullet(startPos, speed, angle - i * spacing, radius, color));
+                bulletList.Add(new Bullet(info.StartPos, info.Speed, info.Angle - i * info.Spacing, info.Radius, info.Color));
             }
         }
 
