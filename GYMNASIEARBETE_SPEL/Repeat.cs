@@ -31,6 +31,7 @@ namespace GYMNASIEARBETE_SPEL
             {
                 if (cooldown <= 0)
                 {
+                    info.Angle += info.AngleChange;
                     action(info);
                     cooldown = interval;
                 }

@@ -27,9 +27,8 @@ namespace GYMNASIEARBETE_SPEL
             //attacks.SplinterShot(start, 500, 0, 5, Color.WHITE, 15, 4);
 
             AttackInfo testInfo = AttackInfo.Default();
-            Repeat test = new Repeat(attacks.BulletCircle, 4, 0.2f, testInfo);
-            repeats.Add(test);
-            repeats.Add(new Repeat(attacks.SplinterShot, 6, 0.2f, testInfo));
+
+            repeats.Add(new Repeat(attacks.SplinterShot, 6, 0.05f, testInfo));
 
 
             while (!Raylib.WindowShouldClose())

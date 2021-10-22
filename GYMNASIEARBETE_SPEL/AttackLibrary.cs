@@ -21,7 +21,7 @@ namespace GYMNASIEARBETE_SPEL
         {
             for (int i = 0; i < info.Amount; i++)
             {
-                bulletList.Add(new Bullet(info.StartPos, info.Speed, i * 360 / info.Amount, info.Radius, info.Color));
+                bulletList.Add(new Bullet(info.StartPos, info.Speed, info.Angle + i * 360 / info.Amount, info.Radius, info.Color));
             }
         }
 

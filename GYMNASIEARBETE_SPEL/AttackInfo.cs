@@ -14,19 +14,21 @@ namespace GYMNASIEARBETE_SPEL
         public Color Color { get; set; }
         public int Amount { get; set; }
         public int Spacing { get; set; }
+        public float AngleChange { get; set; }
 
 
         public static AttackInfo Default()
         {
             AttackInfo info = new AttackInfo()
             {
-                StartPos = new Vector2(650, 100),
-                Speed = 500,
+                StartPos = new Vector2(650, 150),
+                Speed = 600,
                 Angle = 0,
                 Radius = 15,
                 Color = Color.WHITE,
                 Amount = 5,
-                Spacing = 12
+                Spacing = 12,
+                AngleChange = 12
             };
 
             return info;
