@@ -25,10 +25,12 @@ namespace GYMNASIEARBETE_SPEL
             IsActive = true;
         }
 
+        //Runs every frame
         public void Tick(float delta)
         {
             if (time > 0)
             {
+                //Do the following after each interval
                 if (cooldown <= 0)
                 {
                     info.Angle += info.AngleChange;
@@ -44,6 +46,7 @@ namespace GYMNASIEARBETE_SPEL
             time -= delta;
         }
 
+        //Runs Tick for each Repeat
         public static void TickAllRepeats(List<Repeat> repeats, float delta)
         {
             foreach (Repeat repeat in repeats)
@@ -51,6 +54,7 @@ namespace GYMNASIEARBETE_SPEL
                 repeat.Tick(delta);
             }
 
+            //Removes inactive repeats from the list
             for (int x = repeats.Count - 1; x >= 0; x--)
             {
                 Repeat repeat = repeats[x];

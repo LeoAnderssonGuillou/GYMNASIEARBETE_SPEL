@@ -21,14 +21,14 @@ namespace GYMNASIEARBETE_SPEL
         {
             AttackInfo info = new AttackInfo()
             {
-                StartPos = new Vector2(650, 150),
+                StartPos = new Vector2(700, 150),
                 Speed = 600,
                 Angle = 0,
                 Radius = 15,
                 Color = Color.WHITE,
-                Amount = 5,
+                Amount = 9,
                 Spacing = 12,
-                AngleChange = 12
+                AngleChange = 16
             };
 
             return info;

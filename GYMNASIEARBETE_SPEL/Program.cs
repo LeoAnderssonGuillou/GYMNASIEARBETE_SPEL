@@ -9,26 +9,27 @@ namespace GYMNASIEARBETE_SPEL
     {
         static void Main(string[] args)
         {
-            Vector2 winSize = new Vector2(1300, 900);
+            Vector2 winSize = new Vector2(1400, 950);
             Raylib.InitWindow((int)winSize.X, (int)winSize.Y, "Gymnasiearbete");
             Raylib.SetTargetFPS(60);
 
             Ship ship = new Ship(winSize, new Gun());
             List<Bullet> bullets = new List<Bullet>();
             List<Shot> shots = new List<Shot>();
-
             List<Repeat> repeats = new List<Repeat>();
-
 
             AttackLibrary attacks = new AttackLibrary() { bulletList = bullets };
 
-            Vector2 start = new Vector2(650, 100);
+            //Vector2 start = new Vector2(650, 100);
             //attacks.BulletCircle(start, 200, 12, Color.WHITE, 11);
             //attacks.SplinterShot(start, 500, 0, 5, Color.WHITE, 15, 4);
 
             AttackInfo testInfo = AttackInfo.Default();
+            AttackInfo testInfo2 = AttackInfo.Default();
+            testInfo2.Angle += 180;
 
-            repeats.Add(new Repeat(attacks.SplinterShot, 6, 0.05f, testInfo));
+            repeats.Add(new Repeat(attacks.SingleBullet, 20, 0.005f, testInfo));
+            repeats.Add(new Repeat(attacks.SingleBullet, 20, 0.005f, testInfo2));
 
 
             while (!Raylib.WindowShouldClose())
