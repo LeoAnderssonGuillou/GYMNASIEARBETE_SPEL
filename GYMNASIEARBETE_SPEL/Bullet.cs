@@ -30,6 +30,7 @@ namespace GYMNASIEARBETE_SPEL
             {
                 angle -= 16 / bf.X * bf.Y;
                 MoveBullet((delta / bf.X) * bf.Y);
+                angle += 16 / bf.X * bf.Y;
                 Console.WriteLine($"BF ACTIVATED {bf.Y}");
             }
         }

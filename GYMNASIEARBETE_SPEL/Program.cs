@@ -11,7 +11,7 @@ namespace GYMNASIEARBETE_SPEL
         {
             Vector2 winSize = new Vector2(1400, 950);
             Raylib.InitWindow((int)winSize.X, (int)winSize.Y, "Gymnasiearbete");
-            Raylib.SetTargetFPS(24);
+            Raylib.SetTargetFPS(60);
 
             Ship ship = new Ship(winSize, new Gun());
             List<Bullet> bullets = new List<Bullet>();
@@ -32,7 +32,7 @@ namespace GYMNASIEARBETE_SPEL
             //repeats.Add(new Repeat(attacks.SingleBullet, 20, 0.005f, testInfo));
             //repeats.Add(new Repeat(attacks.SingleBullet, 40, 0.04f, testInfo));
             //repeats.Add(new Repeat(attacks.SingleBullet, 40, 0.005f, testInfo2));
-            repeats.Add(new Repeat(attacks.SingleBullet, 40, 0.01f, testInfo2));
+            repeats.Add(new Repeat(attacks.SingleBullet, 40, 0.005f, testInfo2));
 
 
 
