@@ -28,14 +28,22 @@ namespace GYMNASIEARBETE_SPEL
         //Runs every frame
         public void Tick(float delta)
         {
+            info.Delta = delta;
             if (time > 0)
             {
                 //Do the following after each interval
                 if (cooldown <= 0)
                 {
-                    info.Angle += info.AngleChange;
-                    action(info);
-                    cooldown = interval;
+                    float bro = cooldown / -interval;
+                    for (int i = (int)bro; i >= 0; i--)
+                    {
+                        info.BFI.X = (int)bro + 1;
+                        info.BFI.Y = i;
+                        info.Angle += info.AngleChange;
+                        action(info);
+                        cooldown += interval;
+                    }
+                    info.BFI = new Vector2(0, 0);
                 }
                 cooldown -= delta;
             }

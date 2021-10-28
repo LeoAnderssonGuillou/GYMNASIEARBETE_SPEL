@@ -15,6 +15,8 @@ namespace GYMNASIEARBETE_SPEL
         public int Amount { get; set; }
         public int Spacing { get; set; }
         public float AngleChange { get; set; }
+        public Vector2 BFI = new Vector2(0, 0);
+        public float Delta { get; set; } = 0;
 
 
         public static AttackInfo Default()
@@ -24,11 +26,11 @@ namespace GYMNASIEARBETE_SPEL
                 StartPos = new Vector2(700, 150),
                 Speed = 600,
                 Angle = 0,
-                Radius = 15,
+                Radius = 14,
                 Color = Color.WHITE,
                 Amount = 9,
                 Spacing = 12,
-                AngleChange = 16
+                AngleChange = 16,
             };
 
             return info;
