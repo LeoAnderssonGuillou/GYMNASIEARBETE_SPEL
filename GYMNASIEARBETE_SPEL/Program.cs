@@ -29,10 +29,12 @@ namespace GYMNASIEARBETE_SPEL
             AttackInfo testInfo = AttackInfo.Default();
             AttackInfo testInfo2 = AttackInfo.Default();
             testInfo2.Color = Color.RED;
+            testInfo2.Angle += 180;
             //repeats.Add(new Repeat(attacks.SingleBullet, 20, 0.005f, testInfo));
             //repeats.Add(new Repeat(attacks.SingleBullet, 40, 0.04f, testInfo));
             //repeats.Add(new Repeat(attacks.SingleBullet, 40, 0.005f, testInfo2));
-            repeats.Add(new Repeat(attacks.SingleBullet, 40, 0.005f, testInfo2));
+            repeats.Add(new Repeat(attacks.SingleBullet, 40, 0.05f, testInfo2));
+            repeats.Add(new Repeat(attacks.SingleBullet, 40, 0.05f, testInfo));
 
 
 

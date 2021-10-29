@@ -34,16 +34,20 @@ namespace GYMNASIEARBETE_SPEL
                 //Do the following after each interval
                 if (cooldown <= 0)
                 {
-                    float bro = cooldown / -interval;
-                    for (int i = (int)bro; i >= 0; i--)
+                    //Includes system for when the interval is smaller than delta time
+                    //Each interval cooldown has the interval value added and delta time subrtracted
+                    //If one or more interval values fit into the negative value of cooldown after delta time has been subtracted, repeat action that amount of times
+                    //Bullets also spawn as if they had already moved a bit using info.BF
+                    float overflow = cooldown / -interval;
+                    for (int i = (int)overflow; i >= 0; i--)
                     {
-                        info.BFI.X = (int)bro + 1;
-                        info.BFI.Y = i;
+                        info.BF.X = (int)overflow + 1;
+                        info.BF.Y = i;
                         info.Angle += info.AngleChange;
                         action(info);
                         cooldown += interval;
                     }
-                    info.BFI = new Vector2(0, 0);
+                    info.BF = new Vector2(0, 0);
                 }
                 cooldown -= delta;
             }

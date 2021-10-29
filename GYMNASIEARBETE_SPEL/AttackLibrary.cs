@@ -12,7 +12,7 @@ namespace GYMNASIEARBETE_SPEL
         //Fires a single bullet
         public void SingleBullet(AttackInfo info)
         {
-            bulletList.Add(new Bullet(info.StartPos, info.Speed, info.Angle, info.Radius, info.Color, info.BFI, info.Delta));
+            bulletList.Add(new Bullet(info.StartPos, info.Speed, info.Angle, info.Radius, info.Color, info.BF, info.Delta));
 
         }
 
@@ -21,21 +21,21 @@ namespace GYMNASIEARBETE_SPEL
         {
             for (int i = 0; i < info.Amount; i++)
             {
-                bulletList.Add(new Bullet(info.StartPos, info.Speed, info.Angle + i * 360 / info.Amount, info.Radius, info.Color, info.BFI, info.Delta));
+                bulletList.Add(new Bullet(info.StartPos, info.Speed, info.Angle + i * 360 / info.Amount, info.Radius, info.Color, info.BF, info.Delta));
             }
         }
 
         //Fires a shotgun-like shot of bullets. Amount must be an odd number
         public void SplinterShot(AttackInfo info)
         {
-            bulletList.Add(new Bullet(info.StartPos, info.Speed, info.Angle, info.Radius, info.Color, info.BFI, info.Delta));
+            bulletList.Add(new Bullet(info.StartPos, info.Speed, info.Angle, info.Radius, info.Color, info.BF, info.Delta));
             for (int i = 1; i < ((info.Amount - 1) / 2) + 1; i++)
             {
-                bulletList.Add(new Bullet(info.StartPos, info.Speed, info.Angle + i * info.Spacing, info.Radius, info.Color, info.BFI, info.Delta));
+                bulletList.Add(new Bullet(info.StartPos, info.Speed, info.Angle + i * info.Spacing, info.Radius, info.Color, info.BF, info.Delta));
             }
             for (int i = 1; i < ((info.Amount - 1) / 2) + 1; i++)
             {
-                bulletList.Add(new Bullet(info.StartPos, info.Speed, info.Angle - i * info.Spacing, info.Radius, info.Color, info.BFI, info.Delta));
+                bulletList.Add(new Bullet(info.StartPos, info.Speed, info.Angle - i * info.Spacing, info.Radius, info.Color, info.BF, info.Delta));
             }
         }
 

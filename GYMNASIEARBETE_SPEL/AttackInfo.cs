@@ -15,7 +15,7 @@ namespace GYMNASIEARBETE_SPEL
         public int Amount { get; set; }
         public int Spacing { get; set; }
         public float AngleChange { get; set; }
-        public Vector2 BFI = new Vector2(0, 0);
+        public Vector2 BF = new Vector2(0, 0);
         public float Delta { get; set; } = 0;
 
 

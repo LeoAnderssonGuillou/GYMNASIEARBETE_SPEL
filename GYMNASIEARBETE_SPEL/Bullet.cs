@@ -26,11 +26,17 @@ namespace GYMNASIEARBETE_SPEL
             radius = radius_;
             color = color_;
 
+            //BF = "between frames"
+            //Divide delta by the amount of extra bullets that should spawn + 1 (BF.X)
+            //Multiply this value by the extra bullets index (BF.Y)
+            //Example: One extra bullet should spawn => BF.X = 2, BF.Y = 1
+            //Example: The oldest of two extra bullets should spawn => BF.X = 3, BF.Y = 2
             if (bf.Y > 0)
             {
-                angle -= 16 / bf.X * bf.Y;
+                //Also "rewind" angle
+                angle -= (16 / bf.X) * bf.Y;
                 MoveBullet((delta / bf.X) * bf.Y);
-                angle += 16 / bf.X * bf.Y;
+                angle += (16 / bf.X) * bf.Y;
                 Console.WriteLine($"BF ACTIVATED {bf.Y}");
             }
         }
