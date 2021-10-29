@@ -19,7 +19,7 @@ namespace GYMNASIEARBETE_SPEL
             List<Repeat> repeats = new List<Repeat>();
 
             AttackLibrary attacks = new AttackLibrary() { bulletList = bullets };
-            Vector2 start = new Vector2(650, 100);
+            Vector2 start = new Vector2(800, 0);
 
             //Test attacks
             //attacks.BulletCircle(start, 200, 12, Color.WHITE, 11);
@@ -33,13 +33,13 @@ namespace GYMNASIEARBETE_SPEL
             //repeats.Add(new Repeat(attacks.SingleBullet, 20, 0.005f, testInfo));
             //repeats.Add(new Repeat(attacks.SingleBullet, 40, 0.04f, testInfo));
             //repeats.Add(new Repeat(attacks.SingleBullet, 40, 0.005f, testInfo2));
-            repeats.Add(new Repeat(attacks.SingleBullet, 40, 0.05f, testInfo2));
-            repeats.Add(new Repeat(attacks.SingleBullet, 40, 0.05f, testInfo));
+            //repeats.Add(new Repeat(attacks.SplinterShot, 40, 0.03f, testInfo2));
+            //repeats.Add(new Repeat(attacks.SingleBullet, 40, 0.05f, testInfo));
 
 
 
 
-            //Enemy testEnemy = new Enemy(0, start, 250, 45, 5, 400);
+            Enemy testEnemy = new Enemy(1, start, 500, 1000, 45, -30, 90);
 
 
             while (!Raylib.WindowShouldClose())
@@ -50,7 +50,7 @@ namespace GYMNASIEARBETE_SPEL
                 float delta = Raylib.GetFrameTime();
 
 
-                //testEnemy.Tick(delta);
+                testEnemy.Tick(delta);
 
                 Repeat.TickAllRepeats(repeats, delta);
 

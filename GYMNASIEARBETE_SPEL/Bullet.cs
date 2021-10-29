@@ -18,7 +18,7 @@ namespace GYMNASIEARBETE_SPEL
         int radius;
         Color color;
 
-        public Bullet(Vector2 pos_, float speed_, float angle_, int radius_, Color color_, Vector2 bf, float delta)
+        public Bullet(Vector2 pos_, float speed_, float angle_, int radius_, Color color_, Vector2 bf, float delta, float angleChange)
         {
             pos = pos_;
             speedValue = speed_;
@@ -34,10 +34,9 @@ namespace GYMNASIEARBETE_SPEL
             if (bf.Y > 0)
             {
                 //Also "rewind" angle
-                angle -= (16 / bf.X) * bf.Y;
+                angle -= (angleChange / bf.X) * bf.Y;
                 MoveBullet((delta / bf.X) * bf.Y);
-                angle += (16 / bf.X) * bf.Y;
-                Console.WriteLine($"BF ACTIVATED {bf.Y}");
+                angle += (angleChange / bf.X) * bf.Y;
             }
         }
 

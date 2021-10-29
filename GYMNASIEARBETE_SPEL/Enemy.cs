@@ -9,24 +9,29 @@ namespace GYMNASIEARBETE_SPEL
     {
         Vector2 pos = new Vector2();
         Vector2 originalPos = new Vector2();
-        Vector2 distanceTravelled = new Vector2();
         Vector2 speed = new Vector2();
         Rectangle look;
         int movementIndex;
         float speedValue;
-        float angle;
-        float angleChange;
+        float distanceTravelled;
         int maxDistance;
 
-        public Enemy(int moveIndex, Vector2 startPos, float speed, float direction, float direcChange, int distance)
+        float angle;
+        float angleChange;
+        float angleChanged;
+        float maxAngleChange;
+
+
+        public Enemy(int moveIndex, Vector2 startPos, float speed, int distance, float startAngle, float angleChange_, float totalAngleChange)
         {
             movementIndex = moveIndex;
             pos = startPos;
             originalPos = startPos;
-            speedValue = speed;
-            angle = direction;
-            angleChange = direcChange;
             maxDistance = distance;
+            speedValue = speed;
+            angle = startAngle;
+            angleChange = angleChange_;
+            maxAngleChange = totalAngleChange;
         }
 
 
@@ -52,11 +57,17 @@ namespace GYMNASIEARBETE_SPEL
             speed.X = MathF.Sin(angle * MathF.PI / 180) * speedValue * delta;
             speed.Y = MathF.Cos(angle * MathF.PI / 180) * speedValue * delta;
             pos += speed;
-            distanceTravelled += speed;
+            distanceTravelled += speed.Length();
+            angle += angleChange * delta;
+            angleChanged += angleChange * delta;
 
-            if (distanceTravelled.Length() >= maxDistance)
+            if (distanceTravelled >= maxDistance)
             {
                 movementIndex = 0;
+            }
+            if (angleChanged >= maxAngleChange || angleChanged <= -maxAngleChange)
+            {
+                angleChange = 0;
             }
         }
 
