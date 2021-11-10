@@ -42,7 +42,7 @@ namespace GYMNASIEARBETE_SPEL
 
 
             //enemies.Add(new Enemy(1, start, 500, 10000, 90, -100, 10000));
-            repeats.Add(new Repeat(attacks.SingleBullet, 25, 0.1f, testInfo, new Enemy(1, start, 600, 500, 90, -50, 10000), enemies));
+            repeats.Add(new Repeat(attacks.SingleBullet, 25, 0.1f, testInfo, new Enemy(1, start, 600, 500, 90, -50, 10000, 100), enemies));
 
 
             while (!Raylib.WindowShouldClose())
@@ -53,6 +53,11 @@ namespace GYMNASIEARBETE_SPEL
                 float delta = Raylib.GetFrameTime();
 
 
+                Shot.MoveShots(shots, delta);
+                Shot.DrawShots(shots);
+                Shot.CheckCollisionWithEnemy(shots, enemies);
+                Shot.DeleteOffScreenShots(shots, winSize);
+
                 Enemy.TickAllEnemies(enemies, delta);
                 Repeat.TickAllRepeats(repeats, delta);
 
@@ -61,11 +66,6 @@ namespace GYMNASIEARBETE_SPEL
 
                 Bullet.CheckCollisionWithShip(bullets, ship);
                 Bullet.DeleteOffScreenBullets(bullets, winSize);
-
-                Shot.MoveShots(shots, delta);
-                Shot.DrawShots(shots);
-                Shot.CheckCollisionWithEnemy(shots, enemies);
-                Shot.DeleteOffScreenShots(shots, winSize);
 
                 ship.MoveShip(delta, winSize);
                 ship.DrawShip(delta);

@@ -13,7 +13,7 @@ namespace GYMNASIEARBETE_SPEL
         public bool IsActive { get; set; } = false;
         public delegate void Spawn(AttackInfo info);
         Spawn action;
-        public Enemy ParentEnemy { get; set; }
+        public Enemy ParentEnemy { get; set; } = new Enemy();
         public bool TiedToEnemy { get; set; } = false;
 
         AttackInfo info;
@@ -74,6 +74,11 @@ namespace GYMNASIEARBETE_SPEL
                 IsActive = false;
             }
             time -= delta;
+            //Stop if parent dead
+            if (ParentEnemy.hp <= 0)
+            {
+                IsActive = false;
+            }
         }
 
         //Runs Tick for each Repeat

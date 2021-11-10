@@ -15,6 +15,8 @@ namespace GYMNASIEARBETE_SPEL
         float speedValue;
         float distanceTravelled;
         int maxDistance;
+        float red = 255;
+        public int hp;
 
         float angle;
         float angleChange;
@@ -22,7 +24,7 @@ namespace GYMNASIEARBETE_SPEL
         float maxAngleChange;
 
 
-        public Enemy(int moveIndex, Vector2 startPos, float speed, int distance, float startAngle, float angleChange_, float totalAngleChange)
+        public Enemy(int moveIndex, Vector2 startPos, float speed, int distance, float startAngle, float angleChange_, float totalAngleChange, int hp_)
         {
             movementIndex = moveIndex;
             pos = startPos;
@@ -32,6 +34,12 @@ namespace GYMNASIEARBETE_SPEL
             angle = startAngle;
             angleChange = angleChange_;
             maxAngleChange = totalAngleChange;
+            hp = hp_;
+        }
+
+        public Enemy()
+        {
+            hp = 1;
         }
 
 
@@ -48,7 +56,13 @@ namespace GYMNASIEARBETE_SPEL
             }
 
             look = new Rectangle(pos.X, pos.Y, 50, 50);
-            Raylib.DrawRectangleRec(look, Color.YELLOW);
+            Raylib.DrawRectangleRec(look, new Color(255, (int)red, (int)red, 255));
+            //Regain color
+            if (red < 255)
+            {
+                red += delta * 700;
+                red = Math.Min(red, 255);
+            }
         }
 
         public void SimpleMovement(float delta)
@@ -73,22 +87,24 @@ namespace GYMNASIEARBETE_SPEL
 
         public void DamageEnemy()
         {
-            
+            red = 150;
+            hp -= 10;
         }
-
-
-
 
 
 
         //Runs Tick for each enemy
         public static void TickAllEnemies(List<Enemy> enemies, float delta)
         {
-            foreach (Enemy enemy in enemies)
+            for (int x = enemies.Count - 1; x >= 0; x--)
             {
+                Enemy enemy = enemies[x];
                 enemy.Tick(delta);
+                if (enemy.hp <= 0)
+                {
+                    enemies.RemoveAt(x);
+                }
             }
         }
-
     }
 }

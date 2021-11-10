@@ -47,7 +47,7 @@ namespace GYMNASIEARBETE_SPEL
                 {
                     if (Raylib.CheckCollisionCircleRec(shot.pos, shot.radius, enemy.look))
                     {
-                        //enemy.DamageShip();
+                        enemy.DamageEnemy();
                         shots.RemoveAt(x);
                     }
                 }
