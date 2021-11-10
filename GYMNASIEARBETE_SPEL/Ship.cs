@@ -25,7 +25,6 @@ namespace GYMNASIEARBETE_SPEL
         public float SpeedValue { get; set; } = 500;
         public int width = 25;
         public int height = 32;
-        //Vector2 currentSpeed;
         public Vector2 movement = new Vector2(0, 0);
 
         //HP
@@ -62,7 +61,7 @@ namespace GYMNASIEARBETE_SPEL
 
 
         //Move ship based on input
-        public void MoveShip(float deltaTime)
+        public void MoveShip(float deltaTime, Vector2 winSize)
         {
             float speed = SpeedValue * deltaTime;
             movement.X = 0;
@@ -94,7 +93,7 @@ namespace GYMNASIEARBETE_SPEL
             //Change ship location
             Pos = new Vector2(Pos.X + movement.X * speed, Pos.Y + movement.Y * speed);
             //Clamp location within window
-            Pos = new Vector2(Math.Clamp(Pos.X, 0, 1300 - width), Math.Clamp(Pos.Y, 0, 900 - height));
+            Pos = new Vector2(Math.Clamp(Pos.X, 0, winSize.X - width), Math.Clamp(Pos.Y, 0, winSize.Y - height));
             //Change hitbox location
             hitbox.x = Pos.X + hitboxShift.X;
             hitbox.y = Pos.Y + hitboxShift.Y;

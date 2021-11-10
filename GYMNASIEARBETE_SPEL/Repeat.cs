@@ -13,6 +13,8 @@ namespace GYMNASIEARBETE_SPEL
         public bool IsActive { get; set; } = false;
         public delegate void Spawn(AttackInfo info);
         Spawn action;
+        public Enemy ParentEnemy { get; set; }
+        public bool TiedToEnemy { get; set; } = false;
 
         AttackInfo info;
 
@@ -23,6 +25,17 @@ namespace GYMNASIEARBETE_SPEL
             interval = interval_;
             info = info_;
             IsActive = true;
+        }
+        public Repeat(Spawn action_, float seconds, float interval_, AttackInfo info_, Enemy enemy, List<Enemy> enemies)
+        {
+            action = action_;
+            time = seconds;
+            interval = interval_;
+            info = info_;
+            IsActive = true;
+            ParentEnemy = enemy;
+            TiedToEnemy = true;
+            enemies.Add(enemy);
         }
 
         //Runs every frame
@@ -44,6 +57,11 @@ namespace GYMNASIEARBETE_SPEL
                         info.BF.X = (int)overflow + 1;
                         info.BF.Y = i;
                         info.Angle += info.AngleChange;
+                        if (TiedToEnemy) 
+                        { 
+                            info.StartPos = ParentEnemy.pos;
+                            info.ParentSpeed = ParentEnemy.Speed;
+                        }
                         action(info);
                         cooldown += interval;
                     }

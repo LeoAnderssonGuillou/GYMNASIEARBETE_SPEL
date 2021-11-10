@@ -17,14 +17,16 @@ namespace GYMNASIEARBETE_SPEL
         float angle;
         int radius;
         Color color;
+        Vector2 parentSpeed = new Vector2(0, 0);
 
-        public Bullet(Vector2 pos_, float speed_, float angle_, int radius_, Color color_, Vector2 bf, float delta, float angleChange)
+        public Bullet(Vector2 pos_, float speed_, float angle_, int radius_, Color color_, Vector2 bf, float delta, float angleChange, Vector2 parentSpeed_)
         {
             pos = pos_;
             speedValue = speed_;
             angle = angle_;
             radius = radius_;
             color = color_;
+            parentSpeed = parentSpeed_;
 
             //BF = "between frames"
             //Divide delta by the amount of extra bullets that should spawn + 1 (BF.X)
@@ -37,6 +39,7 @@ namespace GYMNASIEARBETE_SPEL
                 angle -= (angleChange / bf.X) * bf.Y;
                 MoveBullet((delta / bf.X) * bf.Y);
                 angle += (angleChange / bf.X) * bf.Y;
+                Console.WriteLine("ACTIVATED");
             }
         }
 
@@ -45,7 +48,7 @@ namespace GYMNASIEARBETE_SPEL
         {
             speed.X = MathF.Sin(angle * MathF.PI / 180) * speedValue * delta;
             speed.Y = MathF.Cos(angle * MathF.PI / 180) * speedValue * delta;
-            pos = pos + speed;
+            pos = pos + speed + parentSpeed;
         }
 
         //Draws all bullets

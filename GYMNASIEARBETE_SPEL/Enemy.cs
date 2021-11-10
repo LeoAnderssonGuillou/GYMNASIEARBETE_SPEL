@@ -7,10 +7,10 @@ namespace GYMNASIEARBETE_SPEL
 {
     public class Enemy
     {
-        Vector2 pos = new Vector2();
+        public Vector2 pos = new Vector2();
         Vector2 originalPos = new Vector2();
-        Vector2 speed = new Vector2();
-        Rectangle look;
+        public Vector2 Speed = new Vector2();
+        public Rectangle look;
         int movementIndex;
         float speedValue;
         float distanceTravelled;
@@ -47,27 +47,46 @@ namespace GYMNASIEARBETE_SPEL
                     break;
             }
 
-
             look = new Rectangle(pos.X, pos.Y, 50, 50);
             Raylib.DrawRectangleRec(look, Color.YELLOW);
         }
 
         public void SimpleMovement(float delta)
         {
-            speed.X = MathF.Sin(angle * MathF.PI / 180) * speedValue * delta;
-            speed.Y = MathF.Cos(angle * MathF.PI / 180) * speedValue * delta;
-            pos += speed;
-            distanceTravelled += speed.Length();
+            Speed.X = MathF.Sin(angle * MathF.PI / 180) * speedValue * delta;
+            Speed.Y = MathF.Cos(angle * MathF.PI / 180) * speedValue * delta;
+            pos += Speed;
+            distanceTravelled += Speed.Length();
             angle += angleChange * delta;
             angleChanged += angleChange * delta;
 
             if (distanceTravelled >= maxDistance)
             {
+                Speed = new Vector2(0, 0);
                 movementIndex = 0;
             }
             if (angleChanged >= maxAngleChange || angleChanged <= -maxAngleChange)
             {
                 angleChange = 0;
+            }
+        }
+
+        public void DamageEnemy()
+        {
+            
+        }
+
+
+
+
+
+
+        //Runs Tick for each enemy
+        public static void TickAllEnemies(List<Enemy> enemies, float delta)
+        {
+            foreach (Enemy enemy in enemies)
+            {
+                enemy.Tick(delta);
             }
         }
 

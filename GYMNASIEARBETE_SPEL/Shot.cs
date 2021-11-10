@@ -38,6 +38,22 @@ namespace GYMNASIEARBETE_SPEL
             }
         }
 
+        public static void CheckCollisionWithEnemy(List<Shot> shots, List<Enemy> enemies)
+        {
+            for (int x = shots.Count - 1; x >= 0; x--)
+            {
+                Shot shot = shots[x];
+                foreach (Enemy enemy in enemies)
+                {
+                    if (Raylib.CheckCollisionCircleRec(shot.pos, shot.radius, enemy.look))
+                    {
+                        //enemy.DamageShip();
+                        shots.RemoveAt(x);
+                    }
+                }
+            }
+        }
+
         //Delete off-screen shots
         public static void DeleteOffScreenShots(List<Shot> shots, Vector2 window)
         {

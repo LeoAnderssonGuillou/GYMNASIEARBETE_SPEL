@@ -9,7 +9,8 @@ namespace GYMNASIEARBETE_SPEL
     {
         static void Main(string[] args)
         {
-            Vector2 winSize = new Vector2(1400, 950);
+            Console.WriteLine("test");
+            Vector2 winSize = new Vector2(1920, 1200);
             Raylib.InitWindow((int)winSize.X, (int)winSize.Y, "Gymnasiearbete");
             Raylib.SetTargetFPS(60);
 
@@ -17,6 +18,7 @@ namespace GYMNASIEARBETE_SPEL
             List<Bullet> bullets = new List<Bullet>();
             List<Shot> shots = new List<Shot>();
             List<Repeat> repeats = new List<Repeat>();
+            List<Enemy> enemies = new List<Enemy>();
 
             AttackLibrary attacks = new AttackLibrary() { bulletList = bullets };
             Vector2 start = new Vector2(800, 0);
@@ -30,16 +32,17 @@ namespace GYMNASIEARBETE_SPEL
             AttackInfo testInfo2 = AttackInfo.Default();
             testInfo2.Color = Color.RED;
             testInfo2.Angle += 180;
-            //repeats.Add(new Repeat(attacks.SingleBullet, 20, 0.005f, testInfo));
-            //repeats.Add(new Repeat(attacks.SingleBullet, 40, 0.04f, testInfo));
-            //repeats.Add(new Repeat(attacks.SingleBullet, 40, 0.005f, testInfo2));
+            //repeats.Add(new Repeat(attacks.SingleBullet, 20, 0.01f, testInfo));
+            //repeats.Add(new Repeat(attacks.SplinterShot, 80, 0.03f, testInfo));
+            //repeats.Add(new Repeat(attacks.SingleBullet, 80, 0.005f, testInfo2));
             //repeats.Add(new Repeat(attacks.SplinterShot, 40, 0.03f, testInfo2));
             //repeats.Add(new Repeat(attacks.SingleBullet, 40, 0.05f, testInfo));
 
 
 
 
-            Enemy testEnemy = new Enemy(1, start, 500, 1000, 45, -30, 90);
+            //enemies.Add(new Enemy(1, start, 500, 10000, 90, -100, 10000));
+            repeats.Add(new Repeat(attacks.SingleBullet, 25, 0.1f, testInfo, new Enemy(1, start, 600, 500, 90, -50, 10000), enemies));
 
 
             while (!Raylib.WindowShouldClose())
@@ -50,8 +53,7 @@ namespace GYMNASIEARBETE_SPEL
                 float delta = Raylib.GetFrameTime();
 
 
-                testEnemy.Tick(delta);
-
+                Enemy.TickAllEnemies(enemies, delta);
                 Repeat.TickAllRepeats(repeats, delta);
 
                 Bullet.DrawBullets(bullets);
@@ -62,9 +64,10 @@ namespace GYMNASIEARBETE_SPEL
 
                 Shot.MoveShots(shots, delta);
                 Shot.DrawShots(shots);
+                Shot.CheckCollisionWithEnemy(shots, enemies);
                 Shot.DeleteOffScreenShots(shots, winSize);
 
-                ship.MoveShip(delta);
+                ship.MoveShip(delta, winSize);
                 ship.DrawShip(delta);
                 ship.DrawHealhtBar(winSize);
 

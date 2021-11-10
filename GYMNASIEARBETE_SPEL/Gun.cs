@@ -12,7 +12,7 @@ namespace GYMNASIEARBETE_SPEL
         bool shouldShoot;
         Clock shootCool = new Clock();
         int gunLength = 20;
-        int shotSpeed = 1000;
+        int shotSpeed = 1500;
 
 
         public void Aim()
@@ -59,7 +59,7 @@ namespace GYMNASIEARBETE_SPEL
 
                 //Create new shot
                 shots.Add(new Shot(startPos, aim * shotSpeed));
-                //Alternative shot speed - affected by ship speed
+                //Alternative shot speed: affected by ship speed
                 //shots.Add(new Shot(startPos, aim * shotSpeed + ship.movement * ship.SpeedValue));
                 shootCool.time = 0.1f;
             }
