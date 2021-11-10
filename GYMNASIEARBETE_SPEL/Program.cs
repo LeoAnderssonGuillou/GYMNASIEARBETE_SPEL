@@ -14,7 +14,9 @@ namespace GYMNASIEARBETE_SPEL
             Raylib.InitWindow((int)winSize.X, (int)winSize.Y, "Gymnasiearbete");
             Raylib.SetTargetFPS(60);
 
-            Ship ship = new Ship(winSize, new Gun());
+            Texture2D shipTex = Raylib.LoadTexture("shiptest.png");
+
+            Ship ship = new Ship(winSize, new Gun(), shipTex);
             List<Bullet> bullets = new List<Bullet>();
             List<Shot> shots = new List<Shot>();
             List<Repeat> repeats = new List<Repeat>();
@@ -43,6 +45,7 @@ namespace GYMNASIEARBETE_SPEL
 
             //enemies.Add(new Enemy(1, start, 500, 10000, 90, -100, 10000));
             repeats.Add(new Repeat(attacks.SingleBullet, 25, 0.1f, testInfo, new Enemy(1, start, 600, 500, 90, -50, 10000, 100), enemies));
+
 
 
             while (!Raylib.WindowShouldClose())

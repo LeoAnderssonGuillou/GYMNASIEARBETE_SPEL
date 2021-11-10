@@ -23,8 +23,8 @@ namespace GYMNASIEARBETE_SPEL
 
         //Speed and size
         public float SpeedValue { get; set; } = 500;
-        public int width = 25;
-        public int height = 32;
+        public int width = 64;
+        public int height = 84;
         public Vector2 movement = new Vector2(0, 0);
 
         //HP
@@ -34,12 +34,13 @@ namespace GYMNASIEARBETE_SPEL
         Rectangle healhtBar;
 
         //Color and invincibility
-        Color orginalColor = new Color(255, 0, 0, 255);
-        Color fadedlColor = new Color(255, 0, 0, 75);
+        Color orginalColor = new Color(255, 255, 255, 255);
+        Color fadedlColor = new Color(255, 255, 255, 75);
         Color color = new Color(255, 0, 0, 255);
         Clock invincibleTimer = new Clock();
         Clock blinkCooldown = new Clock();
         bool isVisable = true;
+        Texture2D texture;
 
         //Hitbox and miscellaneous
         public Rectangle hitbox;
@@ -47,7 +48,7 @@ namespace GYMNASIEARBETE_SPEL
         public Gun gun;
 
         //Calcualte location of hitbox and healthbar depending of window and ship size
-        public Ship(Vector2 window, Gun gun_)
+        public Ship(Vector2 window, Gun gun_, Texture2D texture_)
         {
             int boxWidht = 15;
             int boxHeight = 15;
@@ -57,6 +58,7 @@ namespace GYMNASIEARBETE_SPEL
 
             healhtBar = new Rectangle(((int)window.X / 2) - ((int)hBar.X / 2), (int)(window.Y - hBar.Y * 2), (int)hBar.X, (int)hBar.Y);
             gun = gun_;
+            texture = texture_;
         }
 
 
@@ -103,7 +105,8 @@ namespace GYMNASIEARBETE_SPEL
         public void DrawShip(float delta)
         {
             Blinking(delta);
-            Raylib.DrawRectangle((int)Pos.X, (int)Pos.Y, width, height, color);
+            //Raylib.DrawRectangle((int)Pos.X, (int)Pos.Y, width, height, color);
+            Raylib.DrawTexture(texture, (int)Pos.X, (int)Pos.Y, color);
             //Raylib.DrawRectangle((int)hitbox.x, (int)hitbox.y, (int)hitbox.width, (int)hitbox.height, Color.YELLOW);
         }
 
