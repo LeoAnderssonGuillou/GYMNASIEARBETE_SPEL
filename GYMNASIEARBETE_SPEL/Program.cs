@@ -12,9 +12,10 @@ namespace GYMNASIEARBETE_SPEL
             Console.WriteLine("test");
             Vector2 winSize = new Vector2(1920, 1200);
             Raylib.InitWindow((int)winSize.X, (int)winSize.Y, "Gymnasiearbete");
-            Raylib.SetTargetFPS(60);
+            Raylib.SetTargetFPS(165);
 
-            Texture2D shipTex = Raylib.LoadTexture("shiptest.png");
+            Texture2D shipTex = Raylib.LoadTexture(@"media\shiptest.png");
+            Texture2D shotTex = Raylib.LoadTexture(@"media\shottest.png");
 
             Ship ship = new Ship(winSize, new Gun(), shipTex);
             List<Bullet> bullets = new List<Bullet>();
@@ -75,7 +76,7 @@ namespace GYMNASIEARBETE_SPEL
                 ship.DrawHealhtBar(winSize);
 
                 ship.gun.Aim();
-                ship.gun.Shoot(shots, ship, delta);
+                ship.gun.Shoot(shots, ship, delta, shotTex);
 
 
                 int fps = Raylib.GetFPS();

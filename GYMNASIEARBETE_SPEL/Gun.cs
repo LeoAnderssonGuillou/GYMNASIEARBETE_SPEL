@@ -12,7 +12,7 @@ namespace GYMNASIEARBETE_SPEL
         bool shouldShoot;
         Clock shootCool = new Clock();
         int gunLength = 20;
-        int shotSpeed = 1500;
+        int shotSpeed = 200;
 
 
         public void Aim()
@@ -48,7 +48,7 @@ namespace GYMNASIEARBETE_SPEL
             }
         }
 
-        public void Shoot(List<Shot> shots, Ship ship, float delta)
+        public void Shoot(List<Shot> shots, Ship ship, float delta, Texture2D texture)
         {
             if (shouldShoot && shootCool.time <= 0)
             {
@@ -58,7 +58,7 @@ namespace GYMNASIEARBETE_SPEL
                 startPos.Y = ship.Pos.Y + ship.height / 2 + aim.Y * gunLength;
 
                 //Create new shot
-                shots.Add(new Shot(startPos, aim * shotSpeed));
+                shots.Add(new Shot(startPos, aim * shotSpeed, texture));
                 //Alternative shot speed: affected by ship speed
                 //shots.Add(new Shot(startPos, aim * shotSpeed + ship.movement * ship.SpeedValue));
                 shootCool.time = 0.1f;

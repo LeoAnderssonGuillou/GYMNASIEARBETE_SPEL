@@ -12,11 +12,13 @@ namespace GYMNASIEARBETE_SPEL
         Vector2 pos = new Vector2(0, 0);
         int radius = 8;
         Color color = Color.GREEN;
+        Texture2D texture;
 
-        public Shot(Vector2 pos_, Vector2 movement_)
+        public Shot(Vector2 pos_, Vector2 movement_, Texture2D texture_)
         {
             pos = pos_;
             movement = movement_;
+            texture = texture_;
         }
 
         //Draw all shots
@@ -24,7 +26,8 @@ namespace GYMNASIEARBETE_SPEL
         {
             foreach (Shot shot in shots)
             {
-                Raylib.DrawCircle((int)shot.pos.X, (int)shot.pos.Y, shot.radius, shot.color);
+                //Raylib.DrawCircle((int)shot.pos.X, (int)shot.pos.Y, shot.radius, shot.color);
+                Raylib.DrawTexture(shot.texture, (int)shot.pos.X - 6, (int)shot.pos.Y - 6, Color.WHITE);
             }
         }
 
