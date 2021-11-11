@@ -27,7 +27,8 @@ namespace GYMNASIEARBETE_SPEL
             foreach (Shot shot in shots)
             {
                 //Raylib.DrawCircle((int)shot.pos.X, (int)shot.pos.Y, shot.radius, shot.color);
-                Raylib.DrawTexture(shot.texture, (int)shot.pos.X - 6, (int)shot.pos.Y - 6, Color.WHITE);
+                Raylib.DrawTextureEx(shot.texture, new Vector2(shot.pos.X - 8, shot.pos.Y - 12), 0, 1, Color.WHITE);
+                
             }
         }
 
