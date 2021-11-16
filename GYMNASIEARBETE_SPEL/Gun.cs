@@ -11,7 +11,7 @@ namespace GYMNASIEARBETE_SPEL
         Vector2 aim;
         bool shouldShoot;
         Clock shootCool = new Clock();
-        int gunLength = 40;
+        int gunLength = 32;
         int shotSpeed = 1800;
 
 

@@ -17,6 +17,7 @@ namespace GYMNASIEARBETE_SPEL
             Texture2D shipTex = Raylib.LoadTexture(@"media\shiptest.png");
             Texture2D shotTex = Raylib.LoadTexture(@"media\shottest.png");
 
+            Menu menu = new Menu(winSize);
             Ship ship = new Ship(winSize, new Gun(), shipTex);
             List<Bullet> bullets = new List<Bullet>();
             List<Shot> shots = new List<Shot>();
@@ -41,6 +42,8 @@ namespace GYMNASIEARBETE_SPEL
             //repeats.Add(new Repeat(attacks.SplinterShot, 40, 0.03f, testInfo2));
             //repeats.Add(new Repeat(attacks.SingleBullet, 40, 0.05f, testInfo));
 
+            int gameState = 1;
+
 
 
 
@@ -53,36 +56,50 @@ namespace GYMNASIEARBETE_SPEL
             {
                 Raylib.BeginDrawing();
                 Raylib.ClearBackground(Color.BLACK);
-
                 float delta = Raylib.GetFrameTime();
 
+                switch (gameState)
+            {
+                //Menu
+                case 1:
+                    menu.MenuScreen();
+                    gameState = menu.Input();
 
-                Shot.MoveShots(shots, delta);
-                Shot.DrawShots(shots);
-                Shot.CheckCollisionWithEnemy(shots, enemies);
-                Shot.DeleteOffScreenShots(shots, winSize);
+                    break;
+                //Tutorial and gameplay
+                case 2:
+                    //Shots
+                    Shot.MoveShots(shots, delta);
+                    Shot.DrawShots(shots);
+                    Shot.CheckCollisionWithEnemy(shots, enemies);
+                    Shot.DeleteOffScreenShots(shots, winSize);
 
-                Enemy.TickAllEnemies(enemies, delta);
-                Repeat.TickAllRepeats(repeats, delta);
+                    //Enemies and repeats
+                    Enemy.TickAllEnemies(enemies, delta);
+                    Repeat.TickAllRepeats(repeats, delta);
 
-                Bullet.DrawBullets(bullets);
-                Bullet.MoveBullets(bullets, delta);
+                    //Bullets
+                    Bullet.DrawBullets(bullets);
+                    Bullet.MoveBullets(bullets, delta);
+                    Bullet.CheckCollisionWithShip(bullets, ship);
+                    Bullet.DeleteOffScreenBullets(bullets, winSize);
 
-                Bullet.CheckCollisionWithShip(bullets, ship);
-                Bullet.DeleteOffScreenBullets(bullets, winSize);
+                    //Ship
+                    ship.MoveShip(delta, winSize);
+                    ship.DrawShip(delta);
+                    ship.DrawHealhtBar(winSize);
+                    ship.gun.Aim();
+                    ship.gun.Shoot(shots, ship, delta, shotTex);
+                    break;
+            }
 
-                ship.MoveShip(delta, winSize);
-                ship.DrawShip(delta);
-                ship.DrawHealhtBar(winSize);
-
-                ship.gun.Aim();
-                ship.gun.Shoot(shots, ship, delta, shotTex);
 
 
+                
+
+                //FPS
                 int fps = Raylib.GetFPS();
                 Raylib.DrawText($"{fps}", 50, 50, 50, Color.GRAY);
-
-
 
                 Raylib.EndDrawing();
             }

@@ -27,7 +27,17 @@ namespace GYMNASIEARBETE_SPEL
             foreach (Shot shot in shots)
             {
                 //Raylib.DrawCircle((int)shot.pos.X, (int)shot.pos.Y, shot.radius, shot.color);
-                Raylib.DrawTextureEx(shot.texture, new Vector2(shot.pos.X - 8, shot.pos.Y - 12), 0, 1, Color.WHITE);
+                //Draw shot texture
+                double angle = Math.Atan2(shot.movement.Y, shot.movement.X);
+                angle = (angle * 180 / Math.PI) + 90;
+                Raylib.DrawTexturePro(
+                    shot.texture,
+                    new Rectangle(0, 0, 16, 28),
+                    new Rectangle(shot.pos.X, shot.pos.Y, 16, 28),
+                    new Vector2(8, 28),
+                    (float)angle,
+                    Color.WHITE
+                    );
                 
             }
         }
