@@ -26,7 +26,23 @@ namespace GYMNASIEARBETE_SPEL
             AttackInfo info = new AttackInfo()
             {
                 StartPos = new Vector2(700, 150),
-                Speed = 800,
+                Speed = 500,
+                Angle = 0,
+                Radius = 14,
+                Color = Color.WHITE,
+                Amount = 9,
+                Spacing = 12,
+                AngleChange = 0,
+            };
+            return info;
+        }
+
+        public static AttackInfo Left()
+        {
+            AttackInfo info = new AttackInfo()
+            {
+                StartPos = new Vector2(700, 150),
+                Speed = 500,
                 Angle = -90,
                 Radius = 14,
                 Color = Color.WHITE,
@@ -34,7 +50,54 @@ namespace GYMNASIEARBETE_SPEL
                 Spacing = 12,
                 AngleChange = 0,
             };
+            return info;
+        }
 
+        public static AttackInfo Up()
+        {
+            AttackInfo info = new AttackInfo()
+            {
+                StartPos = new Vector2(700, 150),
+                Speed = 500,
+                Angle = -180,
+                Radius = 14,
+                Color = Color.WHITE,
+                Amount = 9,
+                Spacing = 12,
+                AngleChange = 0,
+            };
+            return info;
+        }
+
+        public static AttackInfo Right()
+        {
+            AttackInfo info = new AttackInfo()
+            {
+                StartPos = new Vector2(700, 150),
+                Speed = 500,
+                Angle = 90,
+                Radius = 14,
+                Color = Color.WHITE,
+                Amount = 9,
+                Spacing = 12,
+                AngleChange = 0,
+            };
+            return info;
+        }
+
+        public static AttackInfo RightTopSplint()
+        {
+            AttackInfo info = new AttackInfo()
+            {
+                StartPos = new Vector2(700, 150),
+                Speed = 600,
+                Angle = -45,
+                Radius = 14,
+                Color = Color.WHITE,
+                Amount = 5,
+                Spacing = 16,
+                AngleChange = 0,
+            };
             return info;
         }
 

@@ -10,18 +10,21 @@ namespace GYMNASIEARBETE_SPEL
         public Vector2 pos = new Vector2();
         Vector2 originalPos = new Vector2();
         public Vector2 Speed = new Vector2();
-        public Rectangle look;
+        public Rectangle hitbox;
         int movementIndex;
         float speedValue;
         float distanceTravelled;
         int maxDistance;
         float red = 255;
         public int hp;
+        Texture2D texture;
 
+        //Movement rotation
         float angle;
         float angleChange;
         float angleChanged;
         float maxAngleChange;
+        public float visRotation;
 
 
         public Enemy(int moveIndex, Vector2 startPos, float speed, int distance, float startAngle, float angleChange_, float totalAngleChange, int hp_)
@@ -35,6 +38,7 @@ namespace GYMNASIEARBETE_SPEL
             angleChange = angleChange_;
             maxAngleChange = totalAngleChange;
             hp = hp_;
+            texture = Raylib.LoadTexture(@"media\satelite.png");
         }
 
         public Enemy()
@@ -54,9 +58,18 @@ namespace GYMNASIEARBETE_SPEL
                     SimpleMovement(delta);
                     break;
             }
-
-            look = new Rectangle(pos.X, pos.Y, 50, 50);
-            Raylib.DrawRectangleRec(look, new Color(255, (int)red, (int)red, 255));
+            //Draw enemy
+            Raylib.DrawTexturePro(
+                    texture,
+                    new Rectangle(0, 0, 208, 104),
+                    new Rectangle(pos.X, pos.Y, 208, 104),
+                    new Vector2(104.5f, 44),
+                    visRotation,
+                    new Color(255, (int)red, (int)red, 255)
+                    );
+            hitbox = new Rectangle(pos.X - 32, pos.Y - 40, 65, 65);
+            //Raylib.DrawRectangleRec(hitbox, new Color(255, (int)red, (int)red, 255));
+            
             //Regain color
             if (red < 255)
             {

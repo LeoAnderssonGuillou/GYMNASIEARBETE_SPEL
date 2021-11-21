@@ -36,6 +36,7 @@ namespace GYMNASIEARBETE_SPEL
             ParentEnemy = enemy;
             TiedToEnemy = true;
             enemies.Add(enemy);
+            ParentEnemy.visRotation = -info.Angle;
         }
 
         //Runs every frame
@@ -66,6 +67,7 @@ namespace GYMNASIEARBETE_SPEL
                         cooldown += interval;
                     }
                     info.BF = new Vector2(0, 0);
+                    ParentEnemy.visRotation -= info.AngleChange;
                 }
                 cooldown -= delta;
             }

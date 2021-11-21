@@ -28,8 +28,8 @@ namespace GYMNASIEARBETE_SPEL
         public Vector2 movement = new Vector2(0, 0);
 
         //HP
-        float maxHp = 1000;
-        float hp = 1000;
+        public float maxHp = 1000;
+        public float hp = 1000;
         Vector2 hBar = new Vector2(500, 25);
         Rectangle healhtBar;
 
@@ -50,6 +50,7 @@ namespace GYMNASIEARBETE_SPEL
         //Calcualte location of hitbox and healthbar depending of window and ship size
         public Ship(Vector2 window, Gun gun_, Texture2D texture_)
         {
+            Pos = new Vector2((int)window.X / 2 - width / 2, 800);
             int boxWidht = 15;
             int boxHeight = 15;
             hitboxShift.X = (width - boxWidht) / 2;
@@ -108,6 +109,7 @@ namespace GYMNASIEARBETE_SPEL
             //Raylib.DrawRectangle((int)Pos.X, (int)Pos.Y, width, height, color);
             Raylib.DrawTexture(texture, (int)Pos.X, (int)Pos.Y, color);
             //Raylib.DrawRectangle((int)hitbox.x, (int)hitbox.y, (int)hitbox.width, (int)hitbox.height, Color.YELLOW);
+            //Raylib.DrawRectangle((int)Pos.X, (int)Pos.Y, 1, 1, Color.YELLOW);
         }
 
         //Runs when ship collides with bullet
@@ -152,11 +154,14 @@ namespace GYMNASIEARBETE_SPEL
         }
 
         //Draw health bar based on window size and HP
-        public void DrawHealhtBar(Vector2 window)
+        public void DrawHealhtBar(Vector2 window, Game game)
         {
-            Raylib.DrawRectangleRec(healhtBar, Color.RED);
-            float greenWidth = (hp / maxHp) * healhtBar.width;
-            Raylib.DrawRectangle((int)healhtBar.x, (int)healhtBar.y, (int)greenWidth, (int)healhtBar.height, Color.GREEN);
+            if (game.gameplayState > 2)
+            {
+                Raylib.DrawRectangleRec(healhtBar, Color.RED);
+                float greenWidth = (hp / maxHp) * healhtBar.width;
+                Raylib.DrawRectangle((int)healhtBar.x, (int)healhtBar.y, (int)greenWidth, (int)healhtBar.height, Color.GREEN);
+            }
         }
 
     }

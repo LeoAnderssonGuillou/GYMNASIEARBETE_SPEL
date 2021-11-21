@@ -59,7 +59,7 @@ namespace GYMNASIEARBETE_SPEL
                 Shot shot = shots[x];
                 foreach (Enemy enemy in enemies)
                 {
-                    if (Raylib.CheckCollisionCircleRec(shot.pos, shot.radius, enemy.look))
+                    if (Raylib.CheckCollisionCircleRec(shot.pos, shot.radius, enemy.hitbox))
                     {
                         enemy.DamageEnemy();
                         shots.RemoveAt(x);
