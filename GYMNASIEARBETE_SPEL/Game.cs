@@ -11,6 +11,8 @@ namespace GYMNASIEARBETE_SPEL
         public int gameState = 1;
         public int gameplayState = 1;
         public float timer = 0;
+        public delegate void SatSpawn(); 
+
 
         public List<Bullet> bullets = new List<Bullet>();
         public List<Shot> shots = new List<Shot>();
@@ -104,27 +106,37 @@ namespace GYMNASIEARBETE_SPEL
 
         public void SatRight()
         {
-            repeats.Add(new Repeat(attacks.SingleBullet, 25, 0.5f, AttackInfo.Default(), new Enemy(1, new Vector2(-200, 100), 200, 10000, 90, 0, 10000, 100), enemies));
+            repeats.Add(new Repeat(attacks.SingleBullet, 1000, 0.5f, AttackInfo.Default(), new Enemy(1, new Vector2(-200, 100), 200, 10000, 90, 0, 10000, 100), enemies));
         }
 
         public void SatDown()
         {
-            repeats.Add(new Repeat(attacks.SingleBullet, 25, 0.5f, AttackInfo.Left(), new Enemy(1, new Vector2((int)winSize.X - 100, -200), 200, 10000, 0, 0, 10000, 100), enemies));
+            repeats.Add(new Repeat(attacks.SingleBullet, 1000, 0.5f, AttackInfo.Left(), new Enemy(1, new Vector2((int)winSize.X - 100, -200), 200, 10000, 0, 0, 10000, 100), enemies));
         }
 
         public void SatLeft()
         {
-            repeats.Add(new Repeat(attacks.SingleBullet, 25, 0.5f, AttackInfo.Up(), new Enemy(1, new Vector2((int)winSize.X + 200, (int)winSize.Y - 100), 200, 10000, -90, 0, 10000, 100), enemies));
+            repeats.Add(new Repeat(attacks.SingleBullet, 1000, 0.5f, AttackInfo.Up(), new Enemy(1, new Vector2((int)winSize.X + 200, (int)winSize.Y - 100), 200, 10000, -90, 0, 10000, 100), enemies));
         }
 
         public void SatUp()
         {
-            repeats.Add(new Repeat(attacks.SingleBullet, 25, 0.5f, AttackInfo.Right(), new Enemy(1, new Vector2(100, (int)winSize.Y + 200), 200, 10000, -180, 0, 10000, 100), enemies));
+            repeats.Add(new Repeat(attacks.SingleBullet, 1000, 0.5f, AttackInfo.Right(), new Enemy(1, new Vector2(100, (int)winSize.Y + 200), 200, 10000, -180, 0, 10000, 100), enemies));
         }
 
         public void RightTopSplint()
         {
-            repeats.Add(new Repeat(attacks.SplinterShot, 25, 1f, AttackInfo.RightTopSplint(), new Enemy(1, new Vector2((int)winSize.X + 100, -100), 200, 250, -45, 0, 10000, 100), enemies));
+            repeats.Add(new Repeat(attacks.SplinterShot, 1000, 1f, AttackInfo.RightTopSplint(), new Enemy(1, new Vector2((int)winSize.X + 100, -100), 200, 250, -45, 0, 10000, 100), enemies));
+        }
+
+        public void LeftTopSplint()
+        {
+            repeats.Add(new Repeat(attacks.SplinterShot, 1000, 1f, AttackInfo.LeftTopSplint(), new Enemy(1, new Vector2(-100, -100), 200, 250, 45, 0, 10000, 100), enemies));
+        }
+
+        public void SpinTop()
+        {
+            repeats.Add(new Repeat(attacks.SingleBullet, 1000, 0.15f, AttackInfo.SpinTop(), new Enemy(1, new Vector2((int)winSize.X  / 2, -100), 200, 400, 0, 0, 10000, 100), enemies));
         }
 
 
@@ -133,74 +145,23 @@ namespace GYMNASIEARBETE_SPEL
             CenteredText("START", (int)winSize.X, 150, 300, 0);
             if (timer > 1)
             {
-                gameplayState++;
-                timer = 0;
+                gameplayState = 9;
+                timer -= 1;
                 SatRight();
             }
         }
 
-        public void Wawe1()
+        public void Wave(int time, SatSpawn sat)
         {
-            if (timer > 4)
+            if (timer > time)
             {
                 gameplayState++;
-                timer = 0;
-                SatDown();
-                RightTopSplint();
+                timer -= time;
+                sat();
             }
         }
 
-        public void Wawe2()
-        {
-            if (timer > 4)
-            {
-                gameplayState++;
-                timer = 0;
-                SatLeft();
-            }
-        }
 
-        public void Wawe3()
-        {
-            if (timer > 5)
-            {
-                gameplayState++;
-                timer = 0;
-                SatUp();
-            }
-        }
-
-        public void Wawe4()
-        {
-            if (timer > 5)
-            {
-                gameplayState++;
-                timer = 0;
-            }
-        }
-
-        public void Wawe5()
-        {
-            if (timer > 5)
-            {
-                gameplayState++;
-                timer = 0;
-            }
-        }
-
-        
-        public void NextEvent(int i)
-        {
-            switch (i)
-            {
-                case 1:
-                    Console.WriteLine();
-                    break;
-                case 2:
-                    Console.WriteLine();
-                    break;
-            }
-        }
 
 
 

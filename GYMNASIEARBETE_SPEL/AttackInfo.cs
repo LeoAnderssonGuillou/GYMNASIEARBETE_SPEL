@@ -89,14 +89,39 @@ namespace GYMNASIEARBETE_SPEL
         {
             AttackInfo info = new AttackInfo()
             {
-                StartPos = new Vector2(700, 150),
                 Speed = 600,
                 Angle = -45,
                 Radius = 14,
                 Color = Color.WHITE,
                 Amount = 5,
                 Spacing = 16,
-                AngleChange = 0,
+            };
+            return info;
+        }
+
+        public static AttackInfo LeftTopSplint()
+        {
+            AttackInfo info = new AttackInfo()
+            {
+                Speed = 600,
+                Angle = 45,
+                Radius = 14,
+                Color = Color.WHITE,
+                Amount = 5,
+                Spacing = 16,
+            };
+            return info;
+        }
+
+        public static AttackInfo SpinTop()
+        {
+            AttackInfo info = new AttackInfo()
+            {
+                Speed = 500,
+                Angle = 90,
+                Radius = 14,
+                Color = Color.WHITE,
+                AngleChange = 20,
             };
             return info;
         }

@@ -67,22 +67,22 @@ namespace GYMNASIEARBETE_SPEL
                             game.GameStart();
                             break;
                         case 4:
-                            game.Wawe1();
+                            game.Wave(4, game.SatDown);
                             break;
                         case 5:
-                            game.Wawe2();
+                            game.Wave(4, game.SatLeft);
                             break;
                         case 6:
-                            game.Wawe3();
+                            game.Wave(5, game.SatUp);
                             break;
                         case 7:
-                            game.Wawe4();
+                            game.Wave(5, game.RightTopSplint);
                             break;
                         case 8:
-                            game.Wawe5();
+                            game.Wave(4, game.LeftTopSplint);
                             break;
                         case 9:
-                            //game.Wawe5();
+                            game.Wave(6, game.SpinTop);
                             break;
                     }
 

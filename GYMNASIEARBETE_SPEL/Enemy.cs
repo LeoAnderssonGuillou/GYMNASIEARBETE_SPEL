@@ -101,7 +101,7 @@ namespace GYMNASIEARBETE_SPEL
         public void DamageEnemy()
         {
             red = 150;
-            hp -= 10;
+            hp -= 20;
         }
 
 
