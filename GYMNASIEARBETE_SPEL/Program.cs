@@ -79,11 +79,59 @@ namespace GYMNASIEARBETE_SPEL
                             game.Wave(5, game.RightTopSplint);
                             break;
                         case 8:
-                            game.Wave(4, game.LeftTopSplint);
+                            game.Wave(4, game.SatRight);
                             break;
                         case 9:
                             game.Wave(6, game.SpinTop);
                             break;
+                        case 10:
+                            game.Wave(10, game.DiagonalSplintRight);
+                            break;
+                        case 11:
+                            game.Wave(3, game.DiagonalSplintLeft);
+                            break;
+                        case 12:
+                            game.Wave(3, game.DiagonalSplintRight);
+                            break;
+                        case 13:
+                            game.Wave(2, game.DiagonalSplintLeft);
+                            break;
+                        case 14:
+                            game.Wave(2, game.DiagonalSplintRight);
+                            break;
+                        case 15:
+                            game.Wave(1, game.DiagonalSplintLeft);
+                            break;
+                        case 16:
+                            game.Wave(1, game.DiagonalSplintRight);
+                            break;
+                        case 17:
+                            game.Wave(0.7f, game.DiagonalSplintLeft);
+                            break;
+                        case 18:
+                            game.Wave(0.7f, game.DiagonalSplintRight);
+                            break;
+                        case 19:
+                            game.Wave(0.5f, game.DiagonalSplintLeft);
+                            break;
+                        case 20:
+                            game.Wave(0.5f, game.DiagonalSplintRight);
+                            break;
+                        case 21:
+                            game.Wave(4, game.SpinDouble);
+                            break;
+                        case 22:
+                            game.Wave(20 - 18, game.RightTopSplint);
+                            break;
+                        case 23:
+                            game.Wave(0, game.LeftTopSplint);
+                            break;
+                        // case 24:
+                        //     game.Wave(1, game.DiagonalSplintRight);
+                        //     break;
+                        // case 25:
+                        //     game.Wave(3, game.DiagonalSplintLeft);
+                        //     break;
                     }
 
 
@@ -100,7 +148,7 @@ namespace GYMNASIEARBETE_SPEL
                     Bullet.DeleteOffScreenBullets(game.bullets, winSize);
 
                     //Enemies and repeats
-                    Enemy.TickAllEnemies(game.enemies, delta);
+                    Enemy.TickAllEnemies(game.enemies, delta, winSize);
                     Repeat.TickAllRepeats(game.repeats, delta);
 
                     //Ship

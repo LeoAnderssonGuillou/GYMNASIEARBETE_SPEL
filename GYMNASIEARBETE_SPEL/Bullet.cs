@@ -48,6 +48,7 @@ namespace GYMNASIEARBETE_SPEL
         {
             speed.X = MathF.Sin(angle * MathF.PI / 180) * speedValue * delta;
             speed.Y = MathF.Cos(angle * MathF.PI / 180) * speedValue * delta;
+            //pos = pos + speed + (parentSpeed * 0.9f);
             pos = pos + speed + parentSpeed;
         }
 

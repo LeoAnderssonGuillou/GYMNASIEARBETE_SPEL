@@ -76,6 +76,7 @@ namespace GYMNASIEARBETE_SPEL
                 red += delta * 700;
                 red = Math.Min(red, 255);
             }
+
         }
 
         public void SimpleMovement(float delta)
@@ -107,13 +108,17 @@ namespace GYMNASIEARBETE_SPEL
 
 
         //Runs Tick for each enemy
-        public static void TickAllEnemies(List<Enemy> enemies, float delta)
+        public static void TickAllEnemies(List<Enemy> enemies, float delta, Vector2 window)
         {
             for (int x = enemies.Count - 1; x >= 0; x--)
             {
                 Enemy enemy = enemies[x];
                 enemy.Tick(delta);
                 if (enemy.hp <= 0)
+                {
+                    enemies.RemoveAt(x);
+                }
+                if (enemy.pos.X > window.X + 500 || enemy.pos.X < -500 || enemy.pos.Y > window.Y + 500 || enemy.pos.Y < -500)
                 {
                     enemies.RemoveAt(x);
                 }

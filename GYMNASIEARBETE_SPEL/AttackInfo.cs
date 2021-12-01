@@ -18,6 +18,7 @@ namespace GYMNASIEARBETE_SPEL
         public Vector2 BF = new Vector2(0, 0);
         public float Delta { get; set; } = 0;
         public Vector2 ParentSpeed { get; set; }
+        public float Delay { get; set; } = 0;
         
 
 
@@ -95,6 +96,7 @@ namespace GYMNASIEARBETE_SPEL
                 Color = Color.WHITE,
                 Amount = 5,
                 Spacing = 16,
+                Delay = 2f,
             };
             return info;
         }
@@ -109,6 +111,7 @@ namespace GYMNASIEARBETE_SPEL
                 Color = Color.WHITE,
                 Amount = 5,
                 Spacing = 16,
+                Delay = 2f,
             };
             return info;
         }
@@ -118,10 +121,68 @@ namespace GYMNASIEARBETE_SPEL
             AttackInfo info = new AttackInfo()
             {
                 Speed = 500,
-                Angle = 90,
+                Angle = 0,
                 Radius = 14,
                 Color = Color.WHITE,
                 AngleChange = 20,
+                Delay = 2.5f,
+            };
+            return info;
+        }
+
+        public static AttackInfo DiagonalSplintRight()
+        {
+            AttackInfo info = new AttackInfo()
+            {
+                Speed = 800,
+                Angle = -60,
+                Radius = 14,
+                Color = Color.WHITE,
+                AngleChange = -25,
+                Amount = 5,
+                Spacing = 16,
+            };
+            return info;
+        }
+
+        public static AttackInfo DiagonalSplintLeft()
+        {
+            AttackInfo info = new AttackInfo()
+            {
+                Speed = 800,
+                Angle = 60,
+                Radius = 14,
+                Color = Color.WHITE,
+                AngleChange = 25,
+                Amount = 5,
+                Spacing = 16,
+            };
+            return info;
+        }
+
+        public static AttackInfo SpinFromLeft()
+        {
+            AttackInfo info = new AttackInfo()
+            {
+                Speed = 500,
+                Angle = -90,
+                Radius = 14,
+                Color = Color.WHITE,
+                AngleChange = 6,
+                Delay = 3f,
+            };
+            return info;
+        }
+        public static AttackInfo SpinFromRight()
+        {
+            AttackInfo info = new AttackInfo()
+            {
+                Speed = 500,
+                Angle = 90,
+                Radius = 14,
+                Color = Color.WHITE,
+                AngleChange = 6,
+                Delay = 3f,
             };
             return info;
         }

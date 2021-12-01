@@ -136,8 +136,25 @@ namespace GYMNASIEARBETE_SPEL
 
         public void SpinTop()
         {
-            repeats.Add(new Repeat(attacks.SingleBullet, 1000, 0.15f, AttackInfo.SpinTop(), new Enemy(1, new Vector2((int)winSize.X  / 2, -100), 200, 400, 0, 0, 10000, 100), enemies));
+            repeats.Add(new Repeat(attacks.SingleBullet, 1000, 0.15f, AttackInfo.SpinTop(), new Enemy(1, new Vector2((int)winSize.X  / 2, -100), 200, 400, 0, 0, 10000, 500), enemies));
         }
+
+        public void DiagonalSplintRight()
+        {
+            repeats.Add(new Repeat(attacks.SplinterShot, 2.6f, 1.4f, AttackInfo.DiagonalSplintRight(), new Enemy(1, new Vector2(1300, -300), 500, 10000, 45, -20, 10000, 100), enemies));
+        }
+
+        public void DiagonalSplintLeft()
+        {
+            repeats.Add(new Repeat(attacks.SplinterShot, 2.6f, 1.4f, AttackInfo.DiagonalSplintLeft(), new Enemy(1, new Vector2(620, -300), 500, 10000, -45, 20, 10000, 100), enemies));
+        }
+
+        public void SpinDouble()
+        {
+            repeats.Add(new Repeat(attacks.SingleBullet, 1000, 0.1f, AttackInfo.SpinFromLeft(), new Enemy(1, new Vector2(-100, 500), 400, 1000, 90, 0, 10000, 500), enemies));
+            repeats.Add(new Repeat(attacks.SingleBullet, 1000, 0.1f, AttackInfo.SpinFromRight(), new Enemy(1, new Vector2(2020, 500), 400, 1000, -90, 0, 10000, 500), enemies));
+        }
+
 
 
         public void GameStart()
@@ -145,13 +162,13 @@ namespace GYMNASIEARBETE_SPEL
             CenteredText("START", (int)winSize.X, 150, 300, 0);
             if (timer > 1)
             {
-                gameplayState = 9;
+                gameplayState = 22;
                 timer -= 1;
                 SatRight();
             }
         }
 
-        public void Wave(int time, SatSpawn sat)
+        public void Wave(float time, SatSpawn sat)
         {
             if (timer > time)
             {

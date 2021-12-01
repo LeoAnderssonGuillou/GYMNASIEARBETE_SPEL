@@ -15,6 +15,7 @@ namespace GYMNASIEARBETE_SPEL
         Spawn action;
         public Enemy ParentEnemy { get; set; } = new Enemy();
         public bool TiedToEnemy { get; set; } = false;
+        float delayTimer;
 
         AttackInfo info;
 
@@ -37,50 +38,57 @@ namespace GYMNASIEARBETE_SPEL
             TiedToEnemy = true;
             enemies.Add(enemy);
             ParentEnemy.visRotation = -info.Angle;
+            ParentEnemy.visRotation -= info.Delta * ((1 / interval) * info.AngleChange);
         }
 
         //Runs every frame
         public void Tick(float delta)
         {
-            info.Delta = delta;
-            if (time > 0)
+            if (delayTimer >= info.Delay)
             {
-                //Do the following after each interval
-                if (cooldown <= 0)
+                info.Delta = delta;
+                if (time > 0)
                 {
-                    //Includes system for when the interval is smaller than delta time
-                    //Each interval cooldown has the interval value added and delta time subrtracted
-                    //If one or more interval values fit into the negative value of cooldown after delta time has been subtracted, repeat action that amount of times
-                    //Bullets also spawn as if they had already moved a bit using info.BF
-                    float overflow = cooldown / -interval;
-                    for (int i = (int)overflow; i >= 0; i--)
+                    //Do the following after each interval
+                    if (cooldown <= 0)
                     {
-                        info.BF.X = (int)overflow + 1;
-                        info.BF.Y = i;
-                        info.Angle += info.AngleChange;
-                        if (TiedToEnemy) 
-                        { 
-                            info.StartPos = ParentEnemy.pos;
-                            info.ParentSpeed = ParentEnemy.Speed;
+                        //Includes system for when the interval is smaller than delta time
+                        //Each interval cooldown has the interval value added and delta time subrtracted
+                        //If one or more interval values fit into the negative value of cooldown after delta time has been subtracted, repeat action that amount of times
+                        //Bullets also spawn as if they had already moved a bit using info.BF
+                        float overflow = cooldown / -interval;
+                        for (int i = (int)overflow; i >= 0; i--)
+                        {
+                            info.BF.X = (int)overflow + 1;
+                            info.BF.Y = i;
+                            info.Angle += info.AngleChange;
+                            if (TiedToEnemy) 
+                            { 
+                                info.StartPos = ParentEnemy.pos;
+                                info.ParentSpeed = ParentEnemy.Speed;
+                            }
+                            action(info);
+                            cooldown += interval;
                         }
-                        action(info);
-                        cooldown += interval;
+                        info.BF = new Vector2(0, 0);
+                        //ParentEnemy.visRotation -= info.AngleChange;
                     }
-                    info.BF = new Vector2(0, 0);
-                    ParentEnemy.visRotation -= info.AngleChange;
+                    cooldown -= delta;
                 }
-                cooldown -= delta;
+                else
+                {
+                    IsActive = false;
+                }
+                time -= delta;
+                //Stop if parent dead
+                if (ParentEnemy.hp <= 0)
+                {
+                    IsActive = false;
+                }
+
+                ParentEnemy.visRotation -= delta * ((1 / interval) * info.AngleChange);
             }
-            else
-            {
-                IsActive = false;
-            }
-            time -= delta;
-            //Stop if parent dead
-            if (ParentEnemy.hp <= 0)
-            {
-                IsActive = false;
-            }
+            delayTimer += delta;
         }
 
         //Runs Tick for each Repeat
