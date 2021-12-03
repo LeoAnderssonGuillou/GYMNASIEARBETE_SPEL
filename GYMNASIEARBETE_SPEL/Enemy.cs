@@ -18,6 +18,7 @@ namespace GYMNASIEARBETE_SPEL
         float red = 255;
         public int hp;
         Texture2D texture;
+        float stayTimer;
 
         //Movement rotation
         float angle;
@@ -52,7 +53,13 @@ namespace GYMNASIEARBETE_SPEL
             switch (movementIndex)
             {
                 case 0:
-
+                    if (stayTimer >= 10)
+                    {
+                        Speed.X = MathF.Sin(angle * MathF.PI / 180) * speedValue * delta;
+                        Speed.Y = MathF.Cos(angle * MathF.PI / 180) * speedValue * delta;
+                        pos -= Speed;
+                    }
+                    stayTimer += delta;
                     break;
                 case 1:
                     SimpleMovement(delta);

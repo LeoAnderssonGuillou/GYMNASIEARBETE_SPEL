@@ -17,8 +17,9 @@ namespace GYMNASIEARBETE_SPEL
             Texture2D shipTex = Raylib.LoadTexture(@"media\shiptest.png");
             Texture2D shotTex = Raylib.LoadTexture(@"media\shottest.png");
             Texture2D satTex = Raylib.LoadTexture(@"media\satelite.png");
+            Texture2D bulletTex = Raylib.LoadTexture(@"media\bullet.png");
 
-            Game game = new Game(winSize);
+            Game game = new Game(winSize, bulletTex);
             Ship ship = new Ship(winSize, new Gun(), shipTex);
             
 
@@ -28,9 +29,6 @@ namespace GYMNASIEARBETE_SPEL
             //attacks.SplinterShot(start, 500, 0, 5, Color.WHITE, 15, 4);
 
             //Test spiral repeat attack
-            AttackInfo testInfo2 = AttackInfo.Default();
-            testInfo2.Color = Color.RED;
-            testInfo2.Angle += 180;
             //repeats.Add(new Repeat(attacks.SingleBullet, 20, 0.01f, testInfo));
             //repeats.Add(new Repeat(attacks.SplinterShot, 80, 0.03f, testInfo));
             //repeats.Add(new Repeat(attacks.SingleBullet, 80, 0.005f, testInfo2));
@@ -84,6 +82,7 @@ namespace GYMNASIEARBETE_SPEL
                         case 9:
                             game.Wave(6, game.SpinTop);
                             break;
+                        //DiagonalSplints
                         case 10:
                             game.Wave(10, game.DiagonalSplintRight);
                             break;
@@ -117,21 +116,173 @@ namespace GYMNASIEARBETE_SPEL
                         case 20:
                             game.Wave(0.5f, game.DiagonalSplintRight);
                             break;
+                        //End
                         case 21:
                             game.Wave(4, game.SpinDouble);
                             break;
                         case 22:
-                            game.Wave(20 - 18, game.RightTopSplint);
+                            game.Wave(20, game.RightTopSplint);
                             break;
                         case 23:
                             game.Wave(0, game.LeftTopSplint);
                             break;
-                        // case 24:
-                        //     game.Wave(1, game.DiagonalSplintRight);
-                        //     break;
-                        // case 25:
-                        //     game.Wave(3, game.DiagonalSplintLeft);
-                        //     break;
+                        case 24:
+                            game.Wave(10, game.AllSides);
+                            break;
+                        case 25:
+                            game.Wave(11, game.SpinTopSuper);
+                            break;
+                        //SpeedBois
+                        case 26:
+                            game.Wave(10, game.SpeedBoi);
+                            break;
+                        case 27:
+                            game.Wave(2, game.SpeedBoi);
+                            break;
+                        case 28:
+                            game.Wave(2, game.SpeedBoi);
+                            break;
+                        case 29:
+                            game.Wave(2f, game.SpeedBoi2);
+                            break;
+                        case 30:
+                            game.Wave(1.4f, game.SpeedBoi2);
+                            break;
+                        case 31:
+                            game.Wave(1.4f, game.SpeedBoi2);
+                            break;
+                        case 32:
+                            game.Wave(1.4f, game.SpeedBoi);
+                            break;
+                        case 33:
+                            game.Wave(0.9f, game.SpeedBoi);
+                            break;
+                        case 34:
+                            game.Wave(0.9f, game.SpeedBoi);
+                            break;
+                        case 35:
+                            game.Wave(1.4f, game.SpeedBoi2);
+                            break;
+                        case 36:
+                            game.Wave(0.6f, game.SpeedBoi2);
+                            break;
+                        case 37:
+                            game.Wave(0.6f, game.SpeedBoi2);
+                            break; //a
+                        case 38:
+                            game.Wave(0.6f, game.SpeedBoi);
+                            break;
+                        case 39:
+                            game.Wave(0.4f, game.SpeedBoi);
+                            break;
+                        case 40:
+                            game.Wave(0.4f, game.SpeedBoi);
+                            break;
+                        case 41:
+                            game.Wave(0.4f, game.SpeedBoi);
+                            break;
+                        case 42:
+                            game.Wave(1f, game.SpeedBoi2);
+                            break;
+                        case 43:
+                            game.Wave(0.4f, game.SpeedBoi2);
+                            break;
+                        case 44:
+                            game.Wave(0.4f, game.SpeedBoi2);
+                            break;
+                        case 45:
+                            game.Wave(0.4f, game.SpeedBoi2);
+                            break;
+                        case 46:
+                            game.Wave(1f, game.SpeedBoi);
+                            break;
+                        case 47:
+                            game.Wave(0.4f, game.SpeedBoi2);
+                            break;
+                        case 48:
+                            game.Wave(0.4f, game.SpeedBoi);
+                            break;
+                        case 49:
+                            game.Wave(0.4f, game.SpeedBoi2);
+                            break;
+                        case 50:
+                            game.Wave(1f, game.SpeedBoi);
+                            break;
+                        case 51:
+                            game.Wave(0.4f, game.SpeedBoi2);
+                            break;
+                        case 52:
+                            game.Wave(0.4f, game.SpeedBoi);
+                            break;
+                        case 53:
+                            game.Wave(0.4f, game.SpeedBoi2);
+                            break;
+                        //End
+                        case 54:
+                            game.Wave(5 - 2, game.SpinBothSides);
+                            break;
+                        case 55:
+                            game.Wave(4f, game.SpinBothSides);
+                            break;
+                        case 56:
+                            game.Wave(4f, game.SpinBothSides);
+                            break;
+                        case 57:
+                            game.Wave(4f, game.SpinBothSides);
+                            break;
+                        case 58:
+                            game.Wave(4f, game.SpinBothSides);
+                            break;
+                        case 59:
+                            game.Wave(1f, game.SpinBothSides);
+                            break;
+                        case 60:
+                            game.Wave(7f, game.SpinAcrossSuper);
+                            break;
+                        //Arcs
+                        case 61:
+                            game.Wave(4 - 1f, game.Arc);
+                            break;
+                        case 62:
+                            game.Wave(1f, game.Arc);
+                            break;
+                        case 63:
+                            game.Wave(1f, game.Arc);
+                            break;
+                        case 64:
+                            game.Wave(1f, game.Arc);
+                            break;
+                        case 65:
+                            game.Wave(1f, game.Arc2);
+                            break;
+                        case 66:
+                            game.Wave(1f, game.Arc2);
+                            break;
+                        case 67:
+                            game.Wave(1f, game.Arc2);
+                            break;
+                        case 68:
+                            game.Wave(1f, game.Arc2);
+                            break;
+                        case 69:
+                            game.Wave(1f, game.Arc2);
+                            break;
+                        case 70:
+                            game.Wave(500f, game.Arc);
+                            break;
+                        case 71:
+                            game.Wave(1f, game.Arc);
+                            break;
+                        case 72:
+                            game.Wave(1f, game.Arc);
+                            break;
+                        case 73:
+                            game.Wave(1f, game.Arc);
+                            break;
+                        case 74:
+                            game.Wave(500f, game.Arc);
+                            break;
+                        
                     }
 
 
@@ -142,7 +293,7 @@ namespace GYMNASIEARBETE_SPEL
                     Shot.DeleteOffScreenShots(game.shots, winSize);
 
                     //Bullets
-                    Bullet.DrawBullets(game.bullets);
+                    Bullet.DrawBullets(game.bullets, bulletTex);
                     Bullet.MoveBullets(game.bullets, delta);
                     Bullet.CheckCollisionWithShip(game.bullets, ship);
                     Bullet.DeleteOffScreenBullets(game.bullets, winSize);

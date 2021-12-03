@@ -37,8 +37,11 @@ namespace GYMNASIEARBETE_SPEL
             ParentEnemy = enemy;
             TiedToEnemy = true;
             enemies.Add(enemy);
-            ParentEnemy.visRotation = -info.Angle;
-            ParentEnemy.visRotation -= info.Delta * ((1 / interval) * info.AngleChange);
+            if (info.IsMain)
+            {
+                ParentEnemy.visRotation = -info.Angle;
+                ParentEnemy.visRotation -= info.Delta * ((1 / interval) * info.AngleChange);
+            }
         }
 
         //Runs every frame
@@ -71,7 +74,6 @@ namespace GYMNASIEARBETE_SPEL
                             cooldown += interval;
                         }
                         info.BF = new Vector2(0, 0);
-                        //ParentEnemy.visRotation -= info.AngleChange;
                     }
                     cooldown -= delta;
                 }
@@ -86,7 +88,10 @@ namespace GYMNASIEARBETE_SPEL
                     IsActive = false;
                 }
 
-                ParentEnemy.visRotation -= delta * ((1 / interval) * info.AngleChange);
+                if (info.IsMain)
+                {
+                    ParentEnemy.visRotation -= delta * ((1 / interval) * info.AngleChange);
+                }
             }
             delayTimer += delta;
         }

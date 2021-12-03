@@ -53,11 +53,12 @@ namespace GYMNASIEARBETE_SPEL
         }
 
         //Draws all bullets
-        public static void DrawBullets(List<Bullet> bullets)
+        public static void DrawBullets(List<Bullet> bullets, Texture2D texture)
         {
             foreach (Bullet bullet in bullets)
             {
-                Raylib.DrawCircle((int)bullet.pos.X, (int)bullet.pos.Y, bullet.radius, bullet.color);
+                //Raylib.DrawCircle((int)bullet.pos.X, (int)bullet.pos.Y, bullet.radius, bullet.color);
+                Raylib.DrawTexture(texture, (int)bullet.pos.X - 12, (int)bullet.pos.Y, Color.WHITE);
             }
         }
 

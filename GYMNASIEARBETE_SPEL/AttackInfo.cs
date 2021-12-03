@@ -19,8 +19,8 @@ namespace GYMNASIEARBETE_SPEL
         public float Delta { get; set; } = 0;
         public Vector2 ParentSpeed { get; set; }
         public float Delay { get; set; } = 0;
+        public bool IsMain { get; set; } = true;
         
-
 
         public static AttackInfo Default()
         {
@@ -183,6 +183,114 @@ namespace GYMNASIEARBETE_SPEL
                 Color = Color.WHITE,
                 AngleChange = 6,
                 Delay = 3f,
+            };
+            return info;
+        }
+
+        public static AttackInfo SpinTopSuper(bool main)
+        {
+            AttackInfo info = new AttackInfo()
+            {
+                Speed = 800,
+                Angle = 0,
+                Radius = 14,
+                Color = Color.WHITE,
+                AngleChange = 21,
+                Delay = 1.75f,
+            };
+            if (main == false)
+            {
+                info.IsMain = false;
+                info.Angle += 180;
+            }
+            return info;
+        }
+
+        public static AttackInfo SpeedBoi()
+        {
+            AttackInfo info = new AttackInfo()
+            {
+                Speed = 750,
+                Angle = -10,
+                Radius = 14,
+                Color = Color.WHITE,
+                AngleChange = 11,
+                Delay = 0.25f,
+            };
+            return info;
+        }
+
+        public static AttackInfo SpeedBoi2()
+        {
+            AttackInfo info = new AttackInfo()
+            {
+                Speed = 800,
+                Angle = -190,
+                Radius = 14,
+                Color = Color.WHITE,
+                AngleChange = 11,
+                Delay = 0.25f,
+            };
+            return info;
+        }
+
+        public static AttackInfo SpinBothSides()
+        {
+            AttackInfo info = new AttackInfo()
+            {
+                Speed = 700,
+                Angle = 0,
+                Radius = 14,
+                Color = Color.WHITE,
+                AngleChange = 21,
+                Delay = 0f,
+            };
+            return info;
+        }
+
+        public static AttackInfo SpinAcrossSuper(bool main)
+        {
+            AttackInfo info = new AttackInfo()
+            {
+                Speed = 800,
+                Angle = 0,
+                Radius = 14,
+                Color = Color.WHITE,
+                AngleChange = 21,
+                Delay = 0,
+            };
+            if (main == false)
+            {
+                info.IsMain = false;
+                info.Angle += 180;
+            }
+            return info;
+        }
+
+        public static AttackInfo Arc()
+        {
+            AttackInfo info = new AttackInfo()
+            {
+                Speed = 1100,
+                Angle = 75,
+                Radius = 14,
+                Color = Color.WHITE,
+                AngleChange = -10,
+                Delay = 0f,
+            };
+            return info;
+        }
+
+        public static AttackInfo Arc2()
+        {
+            AttackInfo info = new AttackInfo()
+            {
+                Speed = 1100,
+                Angle = 285,
+                Radius = 14,
+                Color = Color.WHITE,
+                AngleChange = 10,
+                Delay = 0f,
             };
             return info;
         }

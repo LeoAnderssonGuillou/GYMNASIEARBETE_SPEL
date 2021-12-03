@@ -12,6 +12,7 @@ namespace GYMNASIEARBETE_SPEL
         public int gameplayState = 1;
         public float timer = 0;
         public delegate void SatSpawn(); 
+        Texture2D tex;
 
 
         public List<Bullet> bullets = new List<Bullet>();
@@ -19,13 +20,15 @@ namespace GYMNASIEARBETE_SPEL
         public List<Repeat> repeats = new List<Repeat>();
         public List<Enemy> enemies = new List<Enemy>();
         public AttackLibrary attacks;
-        public AttackInfo testInfo = AttackInfo.Default();
+        public AttackInfo testInfo;
         public Vector2 start = new Vector2(960, 0);
 
-        public Game(Vector2 windowSize)
+        public Game(Vector2 windowSize, Texture2D texture)
         {
             winSize = windowSize;
             attacks = new AttackLibrary() { bulletList = bullets };
+            tex = texture;
+            testInfo = AttackInfo.Default();
         }
 
         public void CenteredText(string text, int fullWidth, int fontSize, int yPos, int xStart)
@@ -151,9 +154,64 @@ namespace GYMNASIEARBETE_SPEL
 
         public void SpinDouble()
         {
-            repeats.Add(new Repeat(attacks.SingleBullet, 1000, 0.1f, AttackInfo.SpinFromLeft(), new Enemy(1, new Vector2(-100, 500), 400, 1000, 90, 0, 10000, 500), enemies));
-            repeats.Add(new Repeat(attacks.SingleBullet, 1000, 0.1f, AttackInfo.SpinFromRight(), new Enemy(1, new Vector2(2020, 500), 400, 1000, -90, 0, 10000, 500), enemies));
+            repeats.Add(new Repeat(attacks.SingleBullet, 10, 0.1f, AttackInfo.SpinFromLeft(), new Enemy(1, new Vector2(-100, 500), 400, 1000, 90, 0, 10000, 500), enemies));
+            repeats.Add(new Repeat(attacks.SingleBullet, 10, 0.1f, AttackInfo.SpinFromRight(), new Enemy(1, new Vector2(2020, 500), 400, 1000, -90, 0, 10000, 500), enemies));
         }
+
+        public void AllSides()
+        {
+            SatDown();
+            SatUp();
+            SatRight();
+            SatLeft();
+        }
+
+        public void SpinTopSuper()
+        {
+            Enemy twinGun = new Enemy(1, new Vector2((int)winSize.X  / 2, -100), 250, 400, 0, 0, 10000, 500);
+            repeats.Add(new Repeat(attacks.SingleBullet, 1000, 0.035f, AttackInfo.SpinTopSuper(true), twinGun, enemies));
+            repeats.Add(new Repeat(attacks.SingleBullet, 1000, 0.035f, AttackInfo.SpinTopSuper(false), twinGun, enemies));
+        }
+
+        public void SpeedBoi()
+        {
+            repeats.Add(new Repeat(attacks.SingleBullet, 1000, 0.28f, AttackInfo.SpeedBoi(), new Enemy(1, new Vector2(-200, 100), 1000, 10000, 90, 0, 10000, 100), enemies));
+        }
+
+        public void SpeedBoi2()
+        {
+            repeats.Add(new Repeat(attacks.SingleBullet, 1000, 0.28f, AttackInfo.SpeedBoi2(), new Enemy(1, new Vector2(2120, 1100), 1000, 10000, -90, 0, 10000, 100), enemies));
+        }
+
+        public void SpinBothSides()
+        {
+            repeats.Add(new Repeat(attacks.SingleBullet, 1000, 0.12f, AttackInfo.SpinBothSides(), new Enemy(1, new Vector2(400, -100), 250, 10000, 0, 0, 10000, 500), enemies));
+            repeats.Add(new Repeat(attacks.SingleBullet, 1000, 0.12f, AttackInfo.SpinBothSides(), new Enemy(1, new Vector2((int)winSize.X - 400, -100), 250, 10000, 0, 0, 10000, 500), enemies));
+        }
+
+        public void DiagonalSplintLefts()
+        {
+            repeats.Add(new Repeat(attacks.SplinterShot, 2.6f, 1.4f, AttackInfo.DiagonalSplintLeft(), new Enemy(1, new Vector2(620, -300), 500, 10000, -45, 20, 10000, 100), enemies));
+        }
+
+        public void SpinAcrossSuper()
+        {
+            Enemy twinGun = new Enemy(1, new Vector2(-150, 300), 250, 2300, 90, 0, 10000, 500);
+            repeats.Add(new Repeat(attacks.SingleBullet, 1000, 0.035f, AttackInfo.SpinAcrossSuper(true), twinGun, enemies));
+            repeats.Add(new Repeat(attacks.SingleBullet, 1000, 0.035f, AttackInfo.SpinAcrossSuper(false), twinGun, enemies));
+        }
+
+        public void Arc()
+        {
+            repeats.Add(new Repeat(attacks.SingleBullet, 1000, 0.3f, AttackInfo.Arc(), new Enemy(1, new Vector2(-200, 1300), 550, 10000, 160, -15, 10000, 100), enemies));
+        }
+
+        public void Arc2()
+        {
+            repeats.Add(new Repeat(attacks.SingleBullet, 1000, 0.3f, AttackInfo.Arc2(), new Enemy(1, new Vector2(2120, 1300), 550, 10000, 200, 15, 10000, 100), enemies));
+        }
+
+
 
 
 
@@ -162,7 +220,7 @@ namespace GYMNASIEARBETE_SPEL
             CenteredText("START", (int)winSize.X, 150, 300, 0);
             if (timer > 1)
             {
-                gameplayState = 22;
+                gameplayState = 61;
                 timer -= 1;
                 SatRight();
             }
