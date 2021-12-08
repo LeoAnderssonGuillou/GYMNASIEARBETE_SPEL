@@ -237,8 +237,8 @@ namespace GYMNASIEARBETE_SPEL
         public void SpinTopSuper()
         {
             Enemy twinGun = new Enemy(1, new Vector2((int)winSize.X  / 2, -100), 250, 400, 0, 0, 10000, 500);
-            repeats.Add(new Repeat(attacks.SingleBullet, 1000, 0.030f, AttackInfo.SpinTopSuper(true), twinGun, enemies));
-            repeats.Add(new Repeat(attacks.SingleBullet, 1000, 0.030f, AttackInfo.SpinTopSuper(false), twinGun, enemies));
+            repeats.Add(new Repeat(attacks.SingleBullet, 1000, 0.035f, AttackInfo.SpinTopSuper(true), twinGun, enemies));
+            repeats.Add(new Repeat(attacks.SingleBullet, 1000, 0.035f, AttackInfo.SpinTopSuper(false), twinGun, enemies));
         }
 
         public void SpeedBoi()
