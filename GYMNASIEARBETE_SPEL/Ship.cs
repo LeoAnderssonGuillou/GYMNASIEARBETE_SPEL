@@ -28,8 +28,8 @@ namespace GYMNASIEARBETE_SPEL
         public Vector2 movement = new Vector2(0, 0);
 
         //HP (1000)
-        public float maxHp = 100;
-        public float hp = 100;
+        public float maxHp = 1000;
+        public float hp = 1000;
         Vector2 hBar = new Vector2(500, 25);
         Rectangle healhtBar;
 

@@ -68,6 +68,10 @@ namespace GYMNASIEARBETE_SPEL
                     SimpleMovement(delta);
                     stayTime = 14;
                     break;
+                case 3:
+                    SimpleMovement(delta);
+                    stayTime = 999;
+                    break;
             }
             //Draw enemy
             Raylib.DrawTexturePro(

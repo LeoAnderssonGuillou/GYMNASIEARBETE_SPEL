@@ -18,6 +18,7 @@ namespace GYMNASIEARBETE_SPEL
         float timeSurvived;
         float waveTime;
         public int enemiesDestroyed;
+        int mode;
 
 
         public List<Bullet> bullets = new List<Bullet>();
@@ -43,8 +44,11 @@ namespace GYMNASIEARBETE_SPEL
 
         public void MenuScreen()
         {
-            CenteredText("SPACE SHOOTER", (int)winSize.X, 100, 140, 0);
-            CenteredText("PRESS ENTER", (int)winSize.X, 60, 600, 0);
+            // CenteredText("SPACE SHOOTER", (int)winSize.X, 100, 140, 0);
+            // CenteredText("PRESS ENTER", (int)winSize.X, 60, 600, 0);
+            // CenteredText("[PRESS 1-5 FOR TESTING MODES]", (int)winSize.X, 28, 700, 0);
+
+            CenteredText("SPACE SHOOTER", (int)winSize.X, 140, 300, 0);
             CenteredText("[PRESS 1-5 FOR TESTING MODES]", (int)winSize.X, 28, 700, 0);
         }
 
@@ -55,39 +59,46 @@ namespace GYMNASIEARBETE_SPEL
             {
                 Raylib.SetTargetFPS(30);
                 state = 2;
+                mode = 1;
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_TWO))
             {
                 Raylib.SetTargetFPS(60);
                 state = 2;
+                mode = 2;
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_THREE))
             {
                 Raylib.SetTargetFPS(100);
                 state = 2;
+                mode = 3;
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_FOUR))
             {
                 Raylib.SetTargetFPS(144);
                 state = 2;
+                mode = 4;
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_FIVE))
             {
-                Raylib.SetTargetFPS(60);
+                Raylib.SetTargetFPS(165);
                 state = 2;
+                mode = 5;
             }
             if (Raylib.IsKeyReleased(KeyboardKey.KEY_ENTER))
             {
-                state = 2;
+                //state = 2;
             }
             return state;
         }
 
         public void GameOverScreen()
         {
-            CenteredText("GAME OVER", (int)winSize.X, 100, 140, 0);
-            CenteredText($"BULLETS SPAWNED: {attacks.bulletsSpawned}", (int)winSize.X, 60, 600, 0);
-            CenteredText($"TIME SURVIVED: {timeSurvived}", (int)winSize.X, 60, 700, 0);
+            CenteredText("THANK YOU FOR PLAYING", (int)winSize.X, 100, 155, 0);
+            Raylib.DrawText($"TIME SURVIVED:              {timeSurvived}", 500, 600, 60, Color.WHITE);
+            Raylib.DrawText($"BULLETS SPAWNED:          {attacks.bulletsSpawned}", 500, 700, 60, Color.WHITE);
+            Raylib.DrawText($"SATELLITES DESTROYED:  {enemiesDestroyed}", 500, 800, 60, Color.WHITE);
+            CenteredText($"MODE {mode}", (int)winSize.X, 40, 1100, 0);
         }
 
         public void Tick(float delta, Ship ship)
@@ -100,7 +111,6 @@ namespace GYMNASIEARBETE_SPEL
                 gameState = 3;
                 timeSurvived += waveTime;
             }
-            Console.WriteLine(timeSurvived);
         }
 
         public void TutorialScreen1(Ship ship)
@@ -112,7 +122,7 @@ namespace GYMNASIEARBETE_SPEL
             if (Raylib.IsKeyReleased(KeyboardKey.KEY_ENTER))
             {
                 gameplayState = 2;
-                repeats.Add(new Repeat(attacks.SingleBullet, 25, 0.5f, testInfo, new Enemy(1, start, 100, 250, 0, 0, 10000, 1), enemies));
+                repeats.Add(new Repeat(attacks.SingleBullet, 25, 0.5f, testInfo, new Enemy(3, start, 100, 250, 0, 0, 10000, 100), enemies));
             }
         }
 
@@ -137,6 +147,7 @@ namespace GYMNASIEARBETE_SPEL
                 gameplayState++;
                 timer -= 1;
                 attacks.bulletsSpawned = 0;
+                enemiesDestroyed = 0;
                 SatRight();
             }
         }
