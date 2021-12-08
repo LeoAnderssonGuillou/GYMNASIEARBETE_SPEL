@@ -17,8 +17,8 @@ namespace GYMNASIEARBETE_SPEL
         int maxDistance;
         float red = 255;
         public int hp;
-        Texture2D texture;
         float stayTimer;
+        float stayTime = 10;
 
         //Movement rotation
         float angle;
@@ -39,21 +39,21 @@ namespace GYMNASIEARBETE_SPEL
             angleChange = angleChange_;
             maxAngleChange = totalAngleChange;
             hp = hp_;
-            texture = Raylib.LoadTexture(@"media\satelite.png");
         }
 
         public Enemy()
         {
             hp = 1;
+            Console.WriteLine("YUP");
         }
 
 
-        public void Tick(float delta)
+        public void Tick(float delta, Texture2D text)
         {
             switch (movementIndex)
             {
                 case 0:
-                    if (stayTimer >= 10)
+                    if (stayTimer >= stayTime)
                     {
                         Speed.X = MathF.Sin(angle * MathF.PI / 180) * speedValue * delta;
                         Speed.Y = MathF.Cos(angle * MathF.PI / 180) * speedValue * delta;
@@ -64,10 +64,14 @@ namespace GYMNASIEARBETE_SPEL
                 case 1:
                     SimpleMovement(delta);
                     break;
+                case 2:
+                    SimpleMovement(delta);
+                    stayTime = 14;
+                    break;
             }
             //Draw enemy
             Raylib.DrawTexturePro(
-                    texture,
+                    text,
                     new Rectangle(0, 0, 208, 104),
                     new Rectangle(pos.X, pos.Y, 208, 104),
                     new Vector2(104.5f, 44),
@@ -115,15 +119,16 @@ namespace GYMNASIEARBETE_SPEL
 
 
         //Runs Tick for each enemy
-        public static void TickAllEnemies(List<Enemy> enemies, float delta, Vector2 window)
+        public static void TickAllEnemies(List<Enemy> enemies, float delta, Vector2 window, Texture2D text, Game game)
         {
             for (int x = enemies.Count - 1; x >= 0; x--)
             {
                 Enemy enemy = enemies[x];
-                enemy.Tick(delta);
+                enemy.Tick(delta, text);
                 if (enemy.hp <= 0)
                 {
                     enemies.RemoveAt(x);
+                    game.enemiesDestroyed++;
                 }
                 if (enemy.pos.X > window.X + 500 || enemy.pos.X < -500 || enemy.pos.Y > window.Y + 500 || enemy.pos.Y < -500)
                 {

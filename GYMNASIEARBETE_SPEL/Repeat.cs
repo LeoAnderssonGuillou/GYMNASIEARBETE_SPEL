@@ -13,7 +13,7 @@ namespace GYMNASIEARBETE_SPEL
         public bool IsActive { get; set; } = false;
         public delegate void Spawn(AttackInfo info);
         Spawn action;
-        public Enemy ParentEnemy { get; set; } = new Enemy();
+        public Enemy ParentEnemy { get; set; }
         public bool TiedToEnemy { get; set; } = false;
         float delayTimer;
 
@@ -36,11 +36,11 @@ namespace GYMNASIEARBETE_SPEL
             IsActive = true;
             ParentEnemy = enemy;
             TiedToEnemy = true;
-            enemies.Add(enemy);
             if (info.IsMain)
             {
                 ParentEnemy.visRotation = -info.Angle;
                 ParentEnemy.visRotation -= info.Delta * ((1 / interval) * info.AngleChange);
+                enemies.Add(enemy);
             }
         }
 
@@ -65,6 +65,7 @@ namespace GYMNASIEARBETE_SPEL
                             info.BF.X = (int)overflow + 1;
                             info.BF.Y = i;
                             info.Angle += info.AngleChange;
+                            info.AngleChange += info.AngleChangeChange;
                             if (TiedToEnemy) 
                             { 
                                 info.StartPos = ParentEnemy.pos;

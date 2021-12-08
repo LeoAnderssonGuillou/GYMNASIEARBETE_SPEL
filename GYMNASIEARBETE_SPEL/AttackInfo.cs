@@ -20,6 +20,7 @@ namespace GYMNASIEARBETE_SPEL
         public Vector2 ParentSpeed { get; set; }
         public float Delay { get; set; } = 0;
         public bool IsMain { get; set; } = true;
+        public float AngleChangeChange { get; set; }
         
 
         public static AttackInfo Default()
@@ -196,7 +197,7 @@ namespace GYMNASIEARBETE_SPEL
                 Radius = 14,
                 Color = Color.WHITE,
                 AngleChange = 21,
-                Delay = 1.75f,
+                Delay = 1.5f,
             };
             if (main == false)
             {
@@ -292,6 +293,57 @@ namespace GYMNASIEARBETE_SPEL
                 AngleChange = 10,
                 Delay = 0f,
             };
+            return info;
+        }
+
+        public static AttackInfo TightSplintTop()
+        {
+            AttackInfo info = new AttackInfo()
+            {
+                Speed = 600,
+                Angle = 0,
+                Radius = 14,
+                Color = Color.WHITE,
+                Amount = 3,
+                Spacing = 6,
+                Delay = 2f,
+            };
+            return info;
+        }
+
+        public static AttackInfo SpinTopSplint()
+        {
+            AttackInfo info = new AttackInfo()
+            {
+                Speed = 800,
+                Angle = 0,
+                Radius = 14,
+                Color = Color.WHITE,
+                AngleChange = 28,
+                Delay = 1.5f,
+                Amount = 5,
+                Spacing = 4,
+            };
+            return info;
+        }
+
+        public static AttackInfo SpinWall(bool main)
+        {
+            AttackInfo info = new AttackInfo()
+            {
+                Speed = 1800,
+                Angle = 90,
+                Radius = 14,
+                Color = Color.WHITE,
+                AngleChange = 1.2f,
+                Delay = 2,
+                AngleChangeChange = 0.02f,
+            };
+            if (main == false)
+            {
+                info.IsMain = false;
+                info.Angle += 180;
+            }
             return info;
         }
 
