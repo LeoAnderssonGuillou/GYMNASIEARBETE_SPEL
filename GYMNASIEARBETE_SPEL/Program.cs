@@ -14,7 +14,8 @@ namespace GYMNASIEARBETE_SPEL
             Raylib.InitWindow((int)winSize.X, (int)winSize.Y, "Gymnasiearbete");
             Raylib.SetTargetFPS(144);
 
-            Texture2D shipTex = Raylib.LoadTexture(@"media\shiptest.png");
+            Texture2D shipTexOld = Raylib.LoadTexture(@"media\shiptest.png");
+            Texture2D shipTex = Raylib.LoadTexture(@"media\ship.png");
             Texture2D shotTex = Raylib.LoadTexture(@"media\shottest.png");
             Texture2D satTex = Raylib.LoadTexture(@"media\satelite.png");
             Texture2D bulletTex = Raylib.LoadTexture(@"media\bullet.png");
@@ -496,7 +497,7 @@ namespace GYMNASIEARBETE_SPEL
 
                 //FPS
                 int fps = Raylib.GetFPS();
-                Raylib.DrawText($"{fps}", 50, 50, 50, Color.GRAY);
+                //Raylib.DrawText($"{fps}", 50, 50, 50, Color.GRAY);
 
                 Raylib.EndDrawing();
             }
